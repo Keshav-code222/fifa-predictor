@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ⚽ FIFA World Cup 2026 Match Predictor
+
+An AI powered match prediction tool for the FIFA World Cup 2026. Select any fixture from the official schedule and get an instant prediction with scoreline, analysis, and confidence level — completely free.
+
+## Live Demo
+
+🔗 https://fifa-predictor-o1sw.vercel.app/
+
+## What it does
+
+- Browse all 66 group stage fixtures grouped by matchday
+- Select any match to see teams, venue, and kickoff time
+- Get an AI generated prediction with predicted score, winner, match analysis, and confidence level
+- Works on mobile and desktop
+
+## Tech Stack
+
+- **Frontend & Backend** — Next.js 15 (App Router)
+- **Styling** — Tailwind CSS
+- **AI** — Groq API (Llama 3.3 70B)
+- **Deployment** — Vercel
+- **Data** — Hardcoded official FIFA 2026 fixtures
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Keshav-code222/fifa-predictor.git
+cd fifa-predictor
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file in the root of the project:
+
+Get your free Groq API key at https://console.groq.com
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+fifa-predictor/
 
-## Learn More
+├── app/
 
-To learn more about Next.js, take a look at the following resources:
+│   ├── api/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+│   │   ├── fixtures/     # Fixtures API route (unused, kept for reference)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+│   │   └── predict/      # Groq AI prediction route
 
-## Deploy on Vercel
+│   ├── page.js           # Main homepage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+│   ├── layout.js         # Root layout
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+│   └── globals.css       # Global styles
+
+├── data/
+
+│   └── fixtures.js       # All 66 FIFA 2026 group stage fixtures
+
+└── public/               # Static assets
+
+
+## Contributing
+
+Contributions are welcome. Here's how you can help:
+
+- **Update fixtures** — As FIFA confirms knockout round matchups, update `data/fixtures.js`
+- **UI improvements** — Better design, mobile responsiveness, country flags
+- **Features** — Share prediction card, results tracker, accuracy stats
+- **Bug fixes** — Open an issue first describing what you found
+
+### Steps to contribute
+
+1. Fork the repository
+2. Create a new branch `git checkout -b feature/your-feature-name`
+3. Make your changes
+4. Commit `git commit -m "feat: describe your change"`
+5. Push `git push origin feature/your-feature-name`
+6. Open a Pull Request
+
+## Roadmap
+
+- [ ] Country flags for each team
+- [ ] Better prediction formatting
+- [ ] Share prediction as image card
+- [ ] Knockout bracket once FIFA confirms
+- [ ] Post match accuracy tracker
+
+## License
+
+MIT — free to use, modify, and distribute.
