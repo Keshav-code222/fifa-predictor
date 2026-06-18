@@ -17,19 +17,33 @@ export async function POST(request) {
 ${home} vs ${away}
 ${matchday} | ${date} | ${venue}
 
-Give your response in exactly this format:
+Respond in exactly this format and nothing else:
 
-PREDICTED SCORE: [home goals] - [away goals]
-WINNER: [team name or Draw]
+HOME_SCORE: [number]
+AWAY_SCORE: [number]
+WINNER: [home team name or away team name or Draw]
+HOME_WIN: [percentage chance home team wins, just the number]
+AWAY_WIN: [percentage chance away team wins, just the number]
+DRAW: [percentage chance of draw, just the number]
 
-ANALYSIS:
-[3-4 sentences analyzing why you predicted this result. Talk about team strength, recent form, and key factors.]
-
-CONFIDENCE: [Low / Medium / High]`,
+Make sure HOME_WIN + AWAY_WIN + DRAW = 100`,
       },
     ],
   });
 
-  const result = chat.choices[0].message.content;
-  return Response.json({ result });
+  const raw = chat.choices[0].message.content;
+
+  const get = (key) => {
+    const match = raw.match(new RegExp(`${key}:\\s*(.+)`));
+    return match ? match[1].trim() : null;
+  };
+
+  return Response.json({
+    homeScore: get("HOME_SCORE"),
+    awayScore: get("AWAY_SCORE"),
+    winner: get("WINNER"),
+    homeWin: get("HOME_WIN"),
+    awayWin: get("AWAY_WIN"),
+    draw: get("DRAW"),
+  });
 }

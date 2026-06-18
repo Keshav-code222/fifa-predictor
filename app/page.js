@@ -2,6 +2,19 @@
 
 import { useState } from "react";
 import { fixtures } from "@/data/fixtures";
+import { teamFlags } from "@/data/teamFlags";
+
+function FlagImage({ team }) {
+  const code = teamFlags[team];
+  if (!code) return <div className="w-16 h-16 rounded-full bg-gray-800 mx-auto" />;
+  return (
+    <img
+      src={`https://flagcdn.com/w80/${code}.png`}
+      alt={team}
+      className="w-16 h-10 mx-auto object-cover rounded"
+    />
+  );
+}
 
 export default function Home() {
   const [selected, setSelected] = useState(null);
@@ -21,9 +34,12 @@ export default function Home() {
     });
 
     const data = await res.json();
-    setPrediction(data.result);
+    setPrediction(data);
     setLoading(false);
   }
+
+  const isHomeWinner = prediction?.winner?.toLowerCase().includes(selected?.home?.toLowerCase());
+  const isAwayWinner = prediction?.winner?.toLowerCase().includes(selected?.away?.toLowerCase());
 
   return (
     <main className="min-h-screen bg-gray-950 text-white p-6">
@@ -69,24 +85,30 @@ export default function Home() {
             <p className="text-gray-400 text-sm mb-6">{selected.venue} · {selected.time}</p>
 
             <div className="flex items-center justify-between mb-8">
-              <div className="text-center flex-1">
-                <div className="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-3">
-                  <span className="text-2xl">🏳️</span>
-                </div>
-                <p className="font-semibold text-lg">{selected.home}</p>
+              <div className={`text-center flex-1 rounded-2xl p-4 transition-all duration-1000 ${prediction && isHomeWinner ? "shadow-[0_0_30px_rgba(74,222,128,0.4)] bg-gray-800" : prediction && isAwayWinner ? "shadow-[0_0_30px_rgba(239,68,68,0.4)] bg-gray-800" : ""}`}>
+                <FlagImage team={selected.home} />
+                <p className={`font-semibold text-lg mt-3 transition-all duration-1000 ${prediction && isHomeWinner ? "text-green-400" : "text-white"}`}>
+                  {selected.home}
+                </p>
                 <p className="text-gray-500 text-xs mt-1">Home</p>
+                {prediction && isHomeWinner && (
+                  <p className="text-green-400 text-xs font-bold mt-2 uppercase tracking-widest animate-pulse">Winner</p>
+                )}
               </div>
 
               <div className="text-center px-4">
                 <p className="text-gray-600 text-2xl font-bold">vs</p>
               </div>
 
-              <div className="text-center flex-1">
-                <div className="w-16 h-16 rounded-full bg-gray-800 flex items-center justify-center mx-auto mb-3">
-                  <span className="text-2xl">🏳️</span>
-                </div>
-                <p className="font-semibold text-lg">{selected.away}</p>
+              <div className={`text-center flex-1 rounded-2xl p-4 transition-all duration-1000 ${prediction && isAwayWinner ? "shadow-[0_0_30px_rgba(74,222,128,0.4)] bg-gray-800" : prediction && isHomeWinner ? "shadow-[0_0_30px_rgba(239,68,68,0.4)] bg-gray-800" : ""}`}>
+                <FlagImage team={selected.away} />
+                <p className={`font-semibold text-lg mt-3 transition-all duration-1000 ${prediction && isAwayWinner ? "text-green-400" : "text-white"}`}>
+                  {selected.away}
+                </p>
                 <p className="text-gray-500 text-xs mt-1">Away</p>
+                {prediction && isAwayWinner && (
+                  <p className="text-green-400 text-xs font-bold mt-2 uppercase tracking-widest animate-pulse">Winner</p>
+                )}
               </div>
             </div>
 
@@ -102,8 +124,48 @@ export default function Home() {
 
         {prediction && (
           <div className="bg-gray-900 rounded-2xl p-6">
-            <p className="text-green-400 text-xs uppercase tracking-widest mb-4">AI Prediction</p>
-            <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">{prediction}</p>
+            <p className="text-green-400 text-xs uppercase tracking-widest mb-6">Win Probability</p>
+
+            <div className="space-y-4">
+              <div>
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="text-gray-400">{selected.home} win</span>
+                  <span className="text-white font-semibold">{prediction.homeWin}%</span>
+                </div>
+                <div className="w-full bg-gray-800 rounded-full h-2">
+                  <div
+                    className="bg-green-500 h-2 rounded-full transition-all duration-1000"
+                    style={{ width: `${prediction.homeWin}%` }}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="text-gray-400">Draw</span>
+                  <span className="text-white font-semibold">{prediction.draw}%</span>
+                </div>
+                <div className="w-full bg-gray-800 rounded-full h-2">
+                  <div
+                    className="bg-yellow-500 h-2 rounded-full transition-all duration-1000"
+                    style={{ width: `${prediction.draw}%` }}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="text-gray-400">{selected.away} win</span>
+                  <span className="text-white font-semibold">{prediction.awayWin}%</span>
+                </div>
+                <div className="w-full bg-gray-800 rounded-full h-2">
+                  <div
+                    className="bg-blue-500 h-2 rounded-full transition-all duration-1000"
+                    style={{ width: `${prediction.awayWin}%` }}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
