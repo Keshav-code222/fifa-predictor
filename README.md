@@ -1,6 +1,6 @@
 # ⚽ FIFA World Cup 2026 Match Predictor
 
-An AI powered match prediction tool for the FIFA World Cup 2026. Select any fixture from the official schedule and get an instant prediction with scoreline, analysis, and confidence level — completely free.
+An AI powered match prediction tool for the FIFA World Cup 2026. Select any fixture from the official schedule and get an instant prediction with win probabilities — completely free.
 
 ## Live Demo
 
@@ -10,8 +10,9 @@ An AI powered match prediction tool for the FIFA World Cup 2026. Select any fixt
 
 - Browse all 66 group stage fixtures grouped by matchday
 - Select any match to see teams, venue, and kickoff time
-- Get an AI generated prediction with predicted score, winner, match analysis, and confidence level
-- Works on mobile and desktop
+- Get an AI prediction with win probability bars
+- Green glow on predicted winner, red glow on loser, yellow on draw
+- Predictions get smarter as real 2026 results are added after each match
 
 ## Tech Stack
 
@@ -19,7 +20,7 @@ An AI powered match prediction tool for the FIFA World Cup 2026. Select any fixt
 - **Styling** — Tailwind CSS
 - **AI** — Groq API (Llama 3.3 70B)
 - **Deployment** — Vercel
-- **Data** — Hardcoded official FIFA 2026 fixtures
+- **Data** — Official FIFA 2026 fixtures + live results
 
 ## Getting Started
 
@@ -50,39 +51,61 @@ npm run dev
 
 Open http://localhost:3000 in your browser.
 
-## Project Structure
+## Updating Match Results
 
+After each match, add the result to `data/results2026.js`:
+
+```javascript
+{ home: "Team A", away: "Team B", score: "2-1", date: "2026-06-XX", note: "One sentence describing the match story" }
+```
+
+If it was an upset, say it clearly in the note. The AI reads every result before predicting — better notes mean smarter predictions.
+
+Then push:
+
+```bash
+git add .
+git commit -m "results: Team A 2-1 Team B"
+git push
+```
+
+Vercel auto deploys within 60 seconds.
+
+## Project Structure
 fifa-predictor/
 
 ├── app/
 
 │   ├── api/
 
-│   │   ├── fixtures/     # Fixtures API route (unused, kept for reference)
+│   │   ├── fixtures/        # Fixtures API route
 
-│   │   └── predict/      # Groq AI prediction route
+│   │   └── predict/         # Groq AI prediction route
 
-│   ├── page.js           # Main homepage
+│   ├── page.js              # Main homepage
 
-│   ├── layout.js         # Root layout
+│   ├── layout.js            # Root layout
 
-│   └── globals.css       # Global styles
+│   └── globals.css          # Global styles
 
 ├── data/
 
-│   └── fixtures.js       # All 66 FIFA 2026 group stage fixtures
+│   ├── fixtures.js          # All 66 FIFA 2026 group stage fixtures
 
-└── public/               # Static assets
+│   ├── results2026.js       # Live match results updated after each game
 
+│   └── teamFlags.js         # Country code mapping for flags
+
+└── public/                  # Static assets
 
 ## Contributing
 
-Contributions are welcome. Here's how you can help:
+Contributions are welcome. Here is how you can help:
 
-- **Update fixtures** — As FIFA confirms knockout round matchups, update `data/fixtures.js`
-- **UI improvements** — Better design, mobile responsiveness, country flags
-- **Features** — Share prediction card, results tracker, accuracy stats
-- **Bug fixes** — Open an issue first describing what you found
+- **Add match results** — Update `data/results2026.js` after each game
+- **UI improvements** — Better design, animations, mobile experience
+- **Knockout fixtures** — Add bracket once FIFA confirms round of 16
+- **Bug fixes** — Open an issue describing what you found
 
 ### Steps to contribute
 
@@ -95,11 +118,11 @@ Contributions are welcome. Here's how you can help:
 
 ## Roadmap
 
-- [ ] Country flags for each team
-- [ ] Better prediction formatting
-- [ ] Share prediction as image card
-- [ ] Knockout bracket once FIFA confirms
+- [ ] Knockout bracket once FIFA confirms round of 16
 - [ ] Post match accuracy tracker
+- [ ] Share prediction as image card
+- [ ] Mobile improvements
+- [ ] Country flags using official sources
 
 ## License
 
