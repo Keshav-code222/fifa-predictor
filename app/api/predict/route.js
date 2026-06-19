@@ -1,4 +1,5 @@
 import Groq from "groq-sdk";
+import { results2026, keyInsights } from "@/data/results2026";
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
@@ -7,13 +8,29 @@ const groq = new Groq({
 export async function POST(request) {
   const { home, away, venue, date, matchday } = await request.json();
 
+  const resultsText = results2026
+    .filter(r => r.score !== "pending")
+    .map(r => `${r.home} ${r.score} ${r.away} — ${r.note}`)
+    .join("\n");
+
+  const insightsText = keyInsights.join("\n");
+
   const chat = await groq.chat.completions.create({
     model: "llama-3.3-70b-versatile",
     messages: [
       {
         role: "user",
-        content: `You are a world class football analyst. Predict this FIFA World Cup 2026 match:
+        content: `You are a world class football analyst with access to real 2026 FIFA World Cup results.
 
+REAL RESULTS SO FAR IN THE 2026 WORLD CUP:
+${resultsText}
+
+KEY INSIGHTS FROM THIS TOURNAMENT SO FAR:
+${insightsText}
+
+Use this real data to inform your prediction. Upsets are happening. Small teams are competing. Do not just pick the obvious favorite.
+
+Now predict this match:
 ${home} vs ${away}
 ${matchday} | ${date} | ${venue}
 

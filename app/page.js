@@ -38,8 +38,9 @@ export default function Home() {
     setLoading(false);
   }
 
-  const isHomeWinner = prediction?.winner?.toLowerCase().includes(selected?.home?.toLowerCase());
-  const isAwayWinner = prediction?.winner?.toLowerCase().includes(selected?.away?.toLowerCase());
+  const isDraw = prediction?.winner?.toLowerCase().includes("draw");
+  const isHomeWinner = !isDraw && prediction?.winner?.toLowerCase().includes(selected?.home?.toLowerCase());
+  const isAwayWinner = !isDraw && prediction?.winner?.toLowerCase().includes(selected?.away?.toLowerCase());
 
   return (
     <main className="min-h-screen bg-gray-950 text-white p-6">
@@ -85,14 +86,25 @@ export default function Home() {
             <p className="text-gray-400 text-sm mb-6">{selected.venue} · {selected.time}</p>
 
             <div className="flex items-center justify-between mb-8">
-              <div className={`text-center flex-1 rounded-2xl p-4 transition-all duration-1000 ${prediction && isHomeWinner ? "shadow-[0_0_30px_rgba(74,222,128,0.4)] bg-gray-800" : prediction && isAwayWinner ? "shadow-[0_0_30px_rgba(239,68,68,0.4)] bg-gray-800" : ""}`}>
+
+              <div className={`text-center flex-1 rounded-2xl p-4 transition-all duration-1000 ${
+                prediction && isHomeWinner ? "shadow-[0_0_30px_rgba(74,222,128,0.4)] bg-gray-800" :
+                prediction && isAwayWinner ? "shadow-[0_0_30px_rgba(239,68,68,0.4)] bg-gray-800" :
+                prediction && isDraw ? "shadow-[0_0_30px_rgba(234,179,8,0.4)] bg-gray-800" : ""
+              }`}>
                 <FlagImage team={selected.home} />
-                <p className={`font-semibold text-lg mt-3 transition-all duration-1000 ${prediction && isHomeWinner ? "text-green-400" : "text-white"}`}>
+                <p className={`font-semibold text-lg mt-3 transition-all duration-1000 ${
+                  prediction && isHomeWinner ? "text-green-400" :
+                  prediction && isDraw ? "text-yellow-400" : "text-white"
+                }`}>
                   {selected.home}
                 </p>
                 <p className="text-gray-500 text-xs mt-1">Home</p>
                 {prediction && isHomeWinner && (
                   <p className="text-green-400 text-xs font-bold mt-2 uppercase tracking-widest animate-pulse">Winner</p>
+                )}
+                {prediction && isDraw && (
+                  <p className="text-yellow-400 text-xs font-bold mt-2 uppercase tracking-widest animate-pulse">Draw</p>
                 )}
               </div>
 
@@ -100,16 +112,27 @@ export default function Home() {
                 <p className="text-gray-600 text-2xl font-bold">vs</p>
               </div>
 
-              <div className={`text-center flex-1 rounded-2xl p-4 transition-all duration-1000 ${prediction && isAwayWinner ? "shadow-[0_0_30px_rgba(74,222,128,0.4)] bg-gray-800" : prediction && isHomeWinner ? "shadow-[0_0_30px_rgba(239,68,68,0.4)] bg-gray-800" : ""}`}>
+              <div className={`text-center flex-1 rounded-2xl p-4 transition-all duration-1000 ${
+                prediction && isAwayWinner ? "shadow-[0_0_30px_rgba(74,222,128,0.4)] bg-gray-800" :
+                prediction && isHomeWinner ? "shadow-[0_0_30px_rgba(239,68,68,0.4)] bg-gray-800" :
+                prediction && isDraw ? "shadow-[0_0_30px_rgba(234,179,8,0.4)] bg-gray-800" : ""
+              }`}>
                 <FlagImage team={selected.away} />
-                <p className={`font-semibold text-lg mt-3 transition-all duration-1000 ${prediction && isAwayWinner ? "text-green-400" : "text-white"}`}>
+                <p className={`font-semibold text-lg mt-3 transition-all duration-1000 ${
+                  prediction && isAwayWinner ? "text-green-400" :
+                  prediction && isDraw ? "text-yellow-400" : "text-white"
+                }`}>
                   {selected.away}
                 </p>
                 <p className="text-gray-500 text-xs mt-1">Away</p>
                 {prediction && isAwayWinner && (
                   <p className="text-green-400 text-xs font-bold mt-2 uppercase tracking-widest animate-pulse">Winner</p>
                 )}
+                {prediction && isDraw && (
+                  <p className="text-yellow-400 text-xs font-bold mt-2 uppercase tracking-widest animate-pulse">Draw</p>
+                )}
               </div>
+
             </div>
 
             <button
