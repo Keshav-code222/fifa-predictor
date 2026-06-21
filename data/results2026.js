@@ -33,6 +33,7 @@ export const results2026 = [
   { home: "Netherlands", away: "Japan", score: "2-2", date: "2026-06-14", group: "Group F", note: "Japan held Netherlands to a draw, showing their quality once again" },
   { home: "Sweden", away: "Tunisia", score: "5-1", date: "2026-06-14", group: "Group F", note: "Sweden were clinical and dominant against Tunisia" },
   { home: "Netherlands", away: "Sweden", score: "5-1", date: "2026-06-20", group: "Group F", note: "Netherlands were clinical and dominant against Sweden and thrashed them 5-1" },
+  { home: "Tunisia", away: "Japan", score: "0-4", date: "2026-06-20", group: "Group F", note: "Japan Demolishes Tunisia 4-0 to Seal Round of 32 Berth" },
 
   // GROUP G
   { home: "Belgium", away: "Egypt", score: "1-1", date: "2026-06-15", group: "Group G", note: "Egypt held Belgium to a surprise draw" },
