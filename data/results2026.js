@@ -21,14 +21,18 @@ export const results2026 = [
   { home: "Australia", away: "Türkiye", score: "2-0", date: "2026-06-13", group: "Group D", note: "Australia were solid defensively and clinical against Türkiye" },
   { home: "USA", away: "Paraguay", score: "4-1", date: "2026-06-12", group: "Group D", note: "USA were dominant on home soil against Paraguay, very convincing" },
   { home: "USA", away: "Australia", score: "2-0", date: "2026-06-19", group: "Group D", note: "USA were solid and clinical against Australia, controlled the match well" },
+  { home: "Türkiye", away: "Paraguay", score: "0-1", date: "2026-06-20", group: "Group D", note: "Paraguay were defensively very solid and beat Türkiye despite getting a red card and eliminated Türkiye out of the world cup" },
 
   // GROUP E
   { home: "Germany", away: "Curaçao", score: "7-1", date: "2026-06-14", group: "Group E", note: "Germany were absolutely ruthless, Curaçao completely overmatched at this level" },
   { home: "Ivory Coast", away: "Ecuador", score: "1-0", date: "2026-06-14", group: "Group E", note: "Ivory Coast edged Ecuador in a tight match" },
+  { home: "Germany", away: "Ivory Coast", score: "2-1", date: "2026-06-21", group: "Group E", note: "Germany scored the winner in the last couple of minutes and made a comeback to beat Ivory Coast" },
+  { home: "Ecuador", away: "Curaçao", score: "0-0", date: "2026-06-21", group: "Group E", note: "Ecuador and Curaçao played a goalless draw in which Curaçao showed brilliant defensive work against Ecuador" },
 
   // GROUP F
   { home: "Netherlands", away: "Japan", score: "2-2", date: "2026-06-14", group: "Group F", note: "Japan held Netherlands to a draw, showing their quality once again" },
   { home: "Sweden", away: "Tunisia", score: "5-1", date: "2026-06-14", group: "Group F", note: "Sweden were clinical and dominant against Tunisia" },
+  { home: "Netherlands", away: "Sweden", score: "5-1", date: "2026-06-20", group: "Group F", note: "Netherlands were clinical and dominant against Sweden and thrashed them 5-1" },
 
   // GROUP G
   { home: "Belgium", away: "Egypt", score: "1-1", date: "2026-06-15", group: "Group G", note: "Egypt held Belgium to a surprise draw" },
