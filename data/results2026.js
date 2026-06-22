@@ -1,6 +1,6 @@
 export const results2026 = [
   // MATCHDAY 1 - June 11-17
-  { home: "Mexico", away: "South Korea", score: "1-0", date: "2026-06-11", group: "Group A", note: "Mexico controlled the match, South Korea struggled to create chances" },
+  { home: "Mexico", away: "South Korea", score: "2-0", date: "2026-06-11", group: "Group A", note: "Mexico controlled the match, South Korea struggled to create chances" },
   { home: "South Africa", away: "Czechia", score: "1-1", date: "2026-06-18", group: "Group A", note: "South Africa held Czechia to a surprise draw, another underdog result" },
   { home: "Canada", away: "Bosnia and Herzegovina", score: "1-1", date: "2026-06-13", group: "Group B", note: "Canada surprisingly drew with Bosnia, not the dominant performance expected" },
   { home: "USA", away: "Paraguay", score: "4-1", date: "2026-06-13", group: "Group D", note: "USA were dominant on home soil against Paraguay, very convincing" },
@@ -38,6 +38,9 @@ export const results2026 = [
   { home: "Ecuador", away: "Curaçao", score: "0-0", date: "2026-06-21", group: "Group E", note: "Ecuador and Curaçao played out a dull goalless draw" },
   { home: "Tunisia", away: "Japan", score: "0-4", date: "2026-06-21", group: "Group F", note: "Japan were brilliant against Tunisia, emphatic win" },
   { home: "Netherlands", away: "Sweden", score: "5-1", date: "2026-06-21", group: "Group F", note: "Netherlands were dominant against Sweden in a high scoring match" },
+  { home: "Spain", away: "Saudi Arabia", score: "4-0", date: "2026-06-21", group: "Group H", note: "Spain dominated the match and played attacking football" },
+  { home: "Belgium", away: "Iran", score: "0-0", date: "2026-06-22", group: "Group G", note: "Despite dominating the match Belgium was unable to break Iranian defence" },
+  { home: "Uruguay", away: "Cabo Verde", score: "2-2", date: "2026-06-22", group: "Group H", note: "Cabo Verde held Uruguay to a massive upset by drwaing the match" },
 ];
 
 export const keyInsights = [
