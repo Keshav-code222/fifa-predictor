@@ -41,6 +41,7 @@ export const results2026 = [
   { home: "Spain", away: "Saudi Arabia", score: "4-0", date: "2026-06-21", group: "Group H", note: "Spain dominated the match and played attacking football" },
   { home: "Belgium", away: "Iran", score: "0-0", date: "2026-06-22", group: "Group G", note: "Despite dominating the match Belgium was unable to break Iranian defence" },
   { home: "Uruguay", away: "Cabo Verde", score: "2-2", date: "2026-06-22", group: "Group H", note: "Cabo Verde held Uruguay to a massive upset by drwaing the match" },
+  { home: "New Zealand", away: "Egypt", score: "1-3", date: "2026-06-22", group: "Group G", note: "Egypt made a comeback and beat New Zealand 3-1" },
 ];
 
 export const keyInsights = [
