@@ -42,6 +42,9 @@ export const results2026 = [
   { home: "Belgium", away: "Iran", score: "0-0", date: "2026-06-22", group: "Group G", note: "Despite dominating the match Belgium was unable to break Iranian defence" },
   { home: "Uruguay", away: "Cabo Verde", score: "2-2", date: "2026-06-22", group: "Group H", note: "Cabo Verde held Uruguay to a massive upset by drwaing the match" },
   { home: "New Zealand", away: "Egypt", score: "1-3", date: "2026-06-22", group: "Group G", note: "Egypt made a comeback and beat New Zealand 3-1" },
+  { home: "Argentina", away: "Austria", score: "2-0", date: "2026-06-22", group: "Group J", note: "Argentina are looking in fine form" },
+  { home: "France", away: "Iraq", score: "3-0", date: "2026-06-23", group: "Group I", note: "France looks very clinical and in good form" },
+  {home: "Norway", away: "Senegal", score: "3-2", date: "2026-06-23", group: "Group I", note: "Norway dominated the match and won it" },
 ];
 
 export const keyInsights = [
