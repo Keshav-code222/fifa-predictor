@@ -46,6 +46,9 @@ export const results2026 = [
   { home: "France", away: "Iraq", score: "3-0", date: "2026-06-23", group: "Group I", note: "France looks very clinical and in good form" },
   { home: "Norway", away: "Senegal", score: "3-2", date: "2026-06-23", group: "Group I", note: "Norway dominated the match and won it" },
   { home: "Jordan", away: "Algeria", score: "1-2", date: "2026-06-23", group: "Group J", note: "Algeria made a comeback to win against Jordan" },
+  { home: "Portugal", away: "Uzbekistan", score: "5-0", date: "2026-06-23", group: "Group K", note: "Portugal dominated the match and scored 5 goals" },
+  { home: "England", away: "Ghana", score: "0-0", date: "2026-06-24", group: "Group L", note: "Ghana held England to a massive upset draw, England could not break them down" },
+  { home: "Panama", away: "Croatia", score: "0-1", date: "2026-06-24", grouo: "Group L", note: "Croatia had a narrow win over Panama" },
 ];
 
 export const keyInsights = [
