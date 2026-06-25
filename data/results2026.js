@@ -52,7 +52,7 @@ export const results2026 = [
   { home: "Colombia", away: "DR Congo", score: "1-0", date: "2026-06-24", group: "Group K", note: "Colombia dominated the match and the result" },
   { home: "Switzerland", away: "Canada", score: "2-1", date: "2026-06-25", group: "Group B", note: "Switzerland beat Canada and advance to round of 32" },
   { home: "Bosnia and Herzegovina", away: "Qatar", score: "3-1", date: "2026-06-25", group: "Group B", note: "Bosnia ends Qatar World Cup dream" },
-  { home: "Morocco", away: "Haiti", acore: "4-2", date: "2026-06-25", group: "Group C", note: "Morocco had a comfortable victory over haiti" },
+  { home: "Morocco", away: "Haiti", score: "4-2", date: "2026-06-25", group: "Group C", note: "Morocco had a comfortable victory over haiti" },
   { home: "Scotland", away: "Brazil", score: "0-3", date: "2026-06-25", group: "Group C", note: "Brazil were clinical against Scotland" },
   { home: "South Africa", away: "South Korea", score: "1-0", date: "2026-06-25", group: "Group A", note: "South Africa won a tight game of football" },
   { home: "Czechia", away: "Mexico", score: "0-3", date: "2026-06-25", group: "Group A", note: "Mexico dominated the match and were clinical" },
