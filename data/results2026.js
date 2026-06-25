@@ -49,6 +49,13 @@ export const results2026 = [
   { home: "Portugal", away: "Uzbekistan", score: "5-0", date: "2026-06-23", group: "Group K", note: "Portugal dominated the match and scored 5 goals" },
   { home: "England", away: "Ghana", score: "0-0", date: "2026-06-24", group: "Group L", note: "Ghana held England to a massive upset draw, England could not break them down" },
   { home: "Panama", away: "Croatia", score: "0-1", date: "2026-06-24", grouo: "Group L", note: "Croatia had a narrow win over Panama" },
+  { home: "Colombia", away: "DR Congo", score: "1-0", date: "2026-06-24", group: "Group K", note: "Colombia dominated the match and the result" },
+  { home: "Switzerland", away: "Canada", score: "2-1", date: "2026-06-25", group: "Group B", note: "Switzerland beat Canada and advance to round of 32" },
+  { home: "Bosnia and Herzegovina", away: "Qatar", score: "3-1", date: "2026-06-25", group: "Group B", note: "Bosnia ends Qatar World Cup dream" },
+  { home: "Morocco", away: "Haiti", acore: "4-2", date: "2026-06-25", group: "Group C", note: "Morocco had a comfortable victory over haiti" },
+  { home: "Scotland", away: "Brazil", score: "0-3", date: "2026-06-25", group: "Group C", note: "Brazil were clinical against Scotland" },
+  { home: "South Africa", away: "South Korea", score: "1-0", date: "2026-06-25", group: "Group A", note: "South Africa won a tight game of football" },
+  { home: "Czechia", away: "Mexico", score: "0-3", date: "2026-06-25", group: "Group A", note: "Mexico dominated the match and were clinical" },
 ];
 
 export const keyInsights = [
