@@ -351,6 +351,191 @@ function KnockoutCard({ fixture }) {
   );
 }
 
+function BigMatchCard({ fixture, label }) {
+  const [prediction, setPrediction] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const isDraw = prediction?.winner?.toLowerCase().includes("draw");
+  const isHomeWinner = !isDraw && prediction?.winner?.toLowerCase().includes(fixture.home.toLowerCase());
+  const isAwayWinner = !isDraw && prediction?.winner?.toLowerCase().includes(fixture.away.toLowerCase());
+
+  async function predict() {
+    setLoading(true);
+    setPrediction(null);
+    const res = await fetch("/api/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(fixture),
+    });
+    const data = await res.json();
+    setPrediction(data);
+    setLoading(false);
+  }
+
+  if (!fixture.confirmed || fixture.home === "TBD" || fixture.away === "TBD") {
+    return (
+      <div className="w-full max-w-md mx-auto bg-gray-900 rounded-3xl p-8 flex flex-col items-center justify-center min-h-52 border border-gray-800">
+        <p className="text-4xl mb-3">⚽</p>
+        <p className="text-gray-500 text-sm font-semibold">{label}</p>
+        <p className="text-gray-700 text-xs mt-2">To Be Decided</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full max-w-lg mx-auto">
+      <style>{`
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        @keyframes floatUp {
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glowPulse {
+          0%, 100% { box-shadow: 0 0 20px rgba(74,222,128,0.3); }
+          50% { box-shadow: 0 0 60px rgba(74,222,128,0.8); }
+        }
+        @keyframes redGlowPulse {
+          0%, 100% { box-shadow: 0 0 20px rgba(239,68,68,0.3); }
+          50% { box-shadow: 0 0 60px rgba(239,68,68,0.8); }
+        }
+        @keyframes goldGlowPulse {
+          0%, 100% { box-shadow: 0 0 20px rgba(234,179,8,0.3); }
+          50% { box-shadow: 0 0 60px rgba(234,179,8,0.8); }
+        }
+        @keyframes starSpin {
+          0% { transform: rotate(0deg) scale(1); }
+          50% { transform: rotate(180deg) scale(1.2); }
+          100% { transform: rotate(360deg) scale(1); }
+        }
+        .shimmer-text {
+          background: linear-gradient(90deg, #4ade80, #facc15, #60a5fa, #4ade80);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: shimmer 3s linear infinite;
+        }
+        .float-in { animation: floatUp 0.6s ease forwards; }
+        .glow-winner { animation: glowPulse 2s ease-in-out infinite; }
+        .glow-loser { animation: redGlowPulse 2s ease-in-out infinite; }
+        .glow-draw { animation: goldGlowPulse 2s ease-in-out infinite; }
+        .star-spin { animation: starSpin 4s linear infinite; }
+      `}</style>
+
+      <div className="text-center mb-4">
+        <span className="shimmer-text text-sm font-bold tracking-widest uppercase">{label}</span>
+      </div>
+
+      <div className="bg-gray-900 rounded-3xl p-7 border border-gray-800">
+        <div className="text-center mb-1 text-xs text-gray-500">{fixture.venue}</div>
+        <div className="text-center mb-6 text-xs text-gray-600">{fixture.date} · {fixture.time}</div>
+
+        <div className="flex items-center justify-between gap-4 mb-6">
+
+          <div className={`flex-1 text-center rounded-2xl p-5 transition-all duration-700 ${
+            prediction && isHomeWinner ? "glow-winner bg-gray-800" :
+            prediction && isAwayWinner ? "glow-loser bg-gray-800" :
+            prediction && isDraw ? "glow-draw bg-gray-800" : "bg-gray-800"
+          }`}>
+            <FlagImage team={fixture.home} />
+            <p className={`text-base font-bold mt-3 transition-all duration-700 ${
+              prediction && isHomeWinner ? "text-green-400" :
+              prediction && isDraw ? "text-yellow-400" : "text-white"
+            }`}>{fixture.home}</p>
+            {prediction && isHomeWinner && <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>}
+            {prediction && isDraw && <p className="text-yellow-400 text-xs font-bold mt-2 animate-pulse tracking-widest">DRAW</p>}
+          </div>
+
+          <div className="text-center px-1">
+            {prediction ? (
+              <div className="float-in">
+                <p className="text-4xl font-bold text-white">
+                  <AnimatedScore value={prediction.homeScore} />
+                  <span className="text-gray-600 mx-2">—</span>
+                  <AnimatedScore value={prediction.awayScore} />
+                </p>
+                <p className="text-gray-600 text-xs mt-1">Predicted</p>
+              </div>
+            ) : (
+              <p className="text-gray-700 text-2xl font-bold">vs</p>
+            )}
+          </div>
+
+          <div className={`flex-1 text-center rounded-2xl p-5 transition-all duration-700 ${
+            prediction && isAwayWinner ? "glow-winner bg-gray-800" :
+            prediction && isHomeWinner ? "glow-loser bg-gray-800" :
+            prediction && isDraw ? "glow-draw bg-gray-800" : "bg-gray-800"
+          }`}>
+            <FlagImage team={fixture.away} />
+            <p className={`text-base font-bold mt-3 transition-all duration-700 ${
+              prediction && isAwayWinner ? "text-green-400" :
+              prediction && isDraw ? "text-yellow-400" : "text-white"
+            }`}>{fixture.away}</p>
+            {prediction && isAwayWinner && <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>}
+            {prediction && isDraw && <p className="text-yellow-400 text-xs font-bold mt-2 animate-pulse tracking-widest">DRAW</p>}
+          </div>
+
+        </div>
+
+        {prediction && (
+          <div className="flex justify-between text-xs px-2 mb-6 float-in">
+            <div className="text-center">
+              <p className="text-gray-400 mb-1">{fixture.home}</p>
+              <div className="w-20 bg-gray-800 rounded-full h-1.5">
+                <div className="bg-green-500 h-1.5 rounded-full transition-all duration-1000" style={{ width: `${prediction.homeWin}%` }} />
+              </div>
+              <p className="text-white mt-1">{prediction.homeWin}%</p>
+            </div>
+            <div className="text-center">
+              <p className="text-gray-400 mb-1">Draw</p>
+              <div className="w-20 bg-gray-800 rounded-full h-1.5">
+                <div className="bg-yellow-500 h-1.5 rounded-full transition-all duration-1000" style={{ width: `${prediction.draw}%` }} />
+              </div>
+              <p className="text-white mt-1">{prediction.draw}%</p>
+            </div>
+            <div className="text-center">
+              <p className="text-gray-400 mb-1">{fixture.away}</p>
+              <div className="w-20 bg-gray-800 rounded-full h-1.5">
+                <div className="bg-blue-500 h-1.5 rounded-full transition-all duration-1000" style={{ width: `${prediction.awayWin}%` }} />
+              </div>
+              <p className="text-white mt-1">{prediction.awayWin}%</p>
+            </div>
+          </div>
+        )}
+
+        <button
+          onClick={predict}
+          disabled={loading}
+          className="w-full bg-green-500 hover:bg-green-400 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-black font-bold py-4 rounded-2xl text-sm tracking-widest uppercase"
+        >
+          {loading ? "Analyzing..." : prediction ? "Predict Again" : "Predict →"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function BigMatchRound({ fixtures, round, label }) {
+  const confirmed = fixtures.filter(f => f.confirmed).length;
+  const total = fixtures.length;
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-white font-semibold text-lg">{round}</h2>
+        <span className="text-gray-500 text-xs">{confirmed}/{total} fixtures confirmed</span>
+      </div>
+      <div className="flex flex-col gap-8 items-center">
+        {fixtures.map((f) => (
+          <BigMatchCard key={f.id} fixture={f} label={label} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function KnockoutRound({ fixtures, round }) {
   const confirmed = fixtures.filter(f => f.confirmed).length;
   const total = fixtures.length;
@@ -420,9 +605,9 @@ export default function Home() {
 
         {activeTab === "r32" && <KnockoutRound fixtures={knockoutFixtures.r32} round="Round of 32" />}
         {activeTab === "r16" && <KnockoutRound fixtures={knockoutFixtures.r16} round="Round of 16" />}
-        {activeTab === "qf" && <KnockoutRound fixtures={knockoutFixtures.qf} round="Quarter Finals" />}
-        {activeTab === "sf" && <KnockoutRound fixtures={knockoutFixtures.sf} round="Semi Finals" />}
-        {activeTab === "final" && <KnockoutRound fixtures={knockoutFixtures.final} round="Final" />}
+        {activeTab === "qf" && <BigMatchRound fixtures={knockoutFixtures.qf} round="Quarter Finals" label="Quarter Final" />}
+        {activeTab === "sf" && <BigMatchRound fixtures={knockoutFixtures.sf} round="Semi Finals" label="Semi Final" />}
+        {activeTab === "final" && <BigMatchRound fixtures={knockoutFixtures.final} round="The Final" label="🏆 FIFA World Cup Final 2026" />}
       </div>
 
     </main>
