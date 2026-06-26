@@ -1,0 +1,43 @@
+export const knockoutFixtures = {
+  r32: [
+    { id: "r32-1", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-2", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-3", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-4", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-5", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-6", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-7", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-8", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-9", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-10", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-11", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-12", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-13", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-14", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-15", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-16", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+  ],
+  r16: [
+    { id: "r16-1", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r16-2", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r16-3", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r16-4", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r16-5", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r16-6", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r16-7", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r16-8", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+  ],
+  qf: [
+    { id: "qf-1", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "qf-2", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "qf-3", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "qf-4", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+  ],
+  sf: [
+    { id: "sf-1", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "sf-2", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+  ],
+  final: [
+    { id: "final-1", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+  ],
+};
