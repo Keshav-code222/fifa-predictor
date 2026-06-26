@@ -56,6 +56,10 @@ export const results2026 = [
   { home: "Scotland", away: "Brazil", score: "0-3", date: "2026-06-25", group: "Group C", note: "Brazil were clinical against Scotland" },
   { home: "South Africa", away: "South Korea", score: "1-0", date: "2026-06-25", group: "Group A", note: "South Africa won a tight game of football" },
   { home: "Czechia", away: "Mexico", score: "0-3", date: "2026-06-25", group: "Group A", note: "Mexico dominated the match and were clinical" },
+  { home: "Curaçao", away: "Ivory Coast", score: "0-2", date: "2026-06-26", group: "Group E", note: "Ivory Coast won easily" },
+  { home: "Ecuador", away: "Germany", score: "2-1", date: "2026-06-26", group: "Group E", note: "Ecuador stunned Germany by beating them and we saw another upset in the world cup" },
+  { home: "Tunisia", away: "Netherlands", score: "1-3", date: "2026-06-26", group: "Group F", note: "Netherlands were clinical against Tunisia" },
+  { home: "Japan", away: "Sweden", score: "1-1", date: "2026-06-26", group: "Group F", note: "Japan and Sweden played boring football" },
 ];
 
 export const keyInsights = [
