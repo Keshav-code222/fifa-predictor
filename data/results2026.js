@@ -60,6 +60,8 @@ export const results2026 = [
   { home: "Ecuador", away: "Germany", score: "2-1", date: "2026-06-26", group: "Group E", note: "Ecuador stunned Germany by beating them and we saw another upset in the world cup" },
   { home: "Tunisia", away: "Netherlands", score: "1-3", date: "2026-06-26", group: "Group F", note: "Netherlands were clinical against Tunisia" },
   { home: "Japan", away: "Sweden", score: "1-1", date: "2026-06-26", group: "Group F", note: "Japan and Sweden played boring football" },
+  { home: "Türkiye", away: "USA", score: "3-2", date: "2026-06-26", group: "Group D", note: "Türkiye won in the last couple of minutes of the match and beat USA" },
+  { home: "Paraguay", away: "Australia", score: "0-0", group: "Group D", note: "Paraguay and Australia played a goalless draw" },
 ];
 
 export const keyInsights = [
