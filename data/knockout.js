@@ -1,7 +1,7 @@
 export const knockoutFixtures = {
   r32: [
-    { id: "r32-1", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
-    { id: "r32-2", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r32-1", home: "South Africa", away: "Canada", date: "2026-06-29", time: "12:30 AM IST", venue: "Los Angeles Stadium, Imglewood", confirmed: true },
+    { id: "r32-2", home: "Brazil", away: "Japan", date: "2026-06-29", time: "10:30 PM IST", venue: "Houston Stadium, Houston", confirmed: true },
     { id: "r32-3", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
     { id: "r32-4", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
     { id: "r32-5", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
