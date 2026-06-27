@@ -86,7 +86,7 @@ export const fixtures = [
   { id: 58, home: "Ecuador", away: "Germany", date: "2026-06-26", time: "1:30 AM ET", venue: "MetLife Stadium, New York/New Jersey", matchday: "Matchday 3", group: "Group E" },
   { id: 59, home: "Tunisia", away: "Netherlands", date: "2026-06-26", time: "4:30 AM ET", venue: "GEHA Field, Kansas City", matchday: "Matchday 3", group: "Group F" },
   { id: 60, home: "Japan", away: "Sweden", date: "2026-06-26", time: "4:30 AM ET", venue: "AT&T Stadium, Dallas", matchday: "Matchday 3", group: "Group F" },
-  { id: 61, home: "Belgium", away: "New Zealand", date: "2026-06-27", time: "8:30 AM ET", venue: "BC Place, Vancouver", matchday: "Matchday 3", group: "Group G" },
+  { id: 61, home: "New Zealand", away: "Belgium", date: "2026-06-27", time: "8:30 AM ET", venue: "BC Place, Vancouver", matchday: "Matchday 3", group: "Group G" },
   { id: 62, home: "Egypt", away: "Iran", date: "2026-06-27", time: "8:30 AM ET", venue: "Lumen Field, Seattle", matchday: "Matchday 3", group: "Group G" },
   { id: 63, home: "Uruguay", away: "Spain", date: "2026-06-27", time: "5:30 AM ET", venue: "Estadio Akron, Guadalajara", matchday: "Matchday 3", group: "Group H" },
   { id: 64, home: "Cabo Verde", away: "Saudi Arabia", date: "2026-06-27", time: "5:30 AM ET", venue: "NRG Stadium, Houston", matchday: "Matchday 3", group: "Group H" },
