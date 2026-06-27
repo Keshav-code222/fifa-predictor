@@ -61,7 +61,11 @@ export const results2026 = [
   { home: "Tunisia", away: "Netherlands", score: "1-3", date: "2026-06-26", group: "Group F", note: "Netherlands were clinical against Tunisia" },
   { home: "Japan", away: "Sweden", score: "1-1", date: "2026-06-26", group: "Group F", note: "Japan and Sweden played boring football" },
   { home: "Türkiye", away: "USA", score: "3-2", date: "2026-06-26", group: "Group D", note: "Türkiye won in the last couple of minutes of the match and beat USA" },
-  { home: "Paraguay", away: "Australia", score: "0-0", group: "Group D", note: "Paraguay and Australia played a goalless draw" },
+  { home: "Paraguay", away: "Australia", score: "0-0", date: "2026-06-26", group: "Group D", note: "Paraguay and Australia played a goalless draw" },
+  { home: "Norway", away: "France", score: "1-4", date: "2026-06-27", group: "Group I", note: "France completely dominated the game and were clinical in front of goal" },
+  { home: "Senegal", away: "Iraq", score: "5-0", date: "2026-06-27", group: "Group I", note: "Senegal thrashed Iraq to win 5-0" },
+  { home: "Cabo Verde", away: "Saudi Arabia", score: "0-0", date: "2026-06-27", group: "Group H", note: "Cabo Verde and Saudi Arabia played a boring goalless draw" },
+  { home: "Uruguay", away: "Spain", score: "0-1", date: "2026-06-27", group: "Group H", note: "Spain beat Uruguay and advance to round of 32" },
 ];
 
 export const keyInsights = [
