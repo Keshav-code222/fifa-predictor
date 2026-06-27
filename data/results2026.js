@@ -66,6 +66,8 @@ export const results2026 = [
   { home: "Senegal", away: "Iraq", score: "5-0", date: "2026-06-27", group: "Group I", note: "Senegal thrashed Iraq to win 5-0" },
   { home: "Cabo Verde", away: "Saudi Arabia", score: "0-0", date: "2026-06-27", group: "Group H", note: "Cabo Verde and Saudi Arabia played a boring goalless draw" },
   { home: "Uruguay", away: "Spain", score: "0-1", date: "2026-06-27", group: "Group H", note: "Spain beat Uruguay and advance to round of 32" },
+  { home: "New Zealand", away: "Belgium", score: "1-5", date: "2026-06-27", group: "Group G", note: "Belgium Dominated the match and the score" },
+  { home: "Egypt", away: "Iran", score: "1-1", date: "2026-06-27", group: "Group G", note: "Iran and Eqypt share points" },
 ];
 
 export const keyInsights = [
