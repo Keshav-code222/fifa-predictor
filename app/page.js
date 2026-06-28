@@ -91,7 +91,6 @@ function MatchCard({ fixture }) {
 
   return (
     <div className="bg-gray-900 rounded-2xl p-5 flex flex-col gap-4">
-
       <div className="flex items-center justify-between text-xs text-gray-500">
         <span>{fixture.matchday}</span>
         <span>{fixture.date}</span>
@@ -135,7 +134,6 @@ function MatchCard({ fixture }) {
               {actualWinner === "draw" && <p className="text-yellow-400 text-xs font-bold mt-1 animate-pulse">Draw</p>}
             </div>
           </div>
-
           <div className="text-center">
             <span className="text-xs text-gray-500 uppercase tracking-widest">Match Completed</span>
           </div>
@@ -224,7 +222,6 @@ function MatchCard({ fixture }) {
           </button>
         </>
       )}
-
     </div>
   );
 }
@@ -233,9 +230,8 @@ function KnockoutCard({ fixture }) {
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const isDraw = prediction?.winner?.toLowerCase().includes("draw");
-  const isHomeWinner = !isDraw && prediction?.winner?.toLowerCase().includes(fixture.home.toLowerCase());
-  const isAwayWinner = !isDraw && prediction?.winner?.toLowerCase().includes(fixture.away.toLowerCase());
+  const isHomeWinner = prediction?.winner?.toLowerCase().includes(fixture.home.toLowerCase());
+  const isAwayWinner = prediction?.winner?.toLowerCase().includes(fixture.away.toLowerCase());
 
   async function predict() {
     setLoading(true);
@@ -243,7 +239,7 @@ function KnockoutCard({ fixture }) {
     const res = await fetch("/api/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(fixture),
+      body: JSON.stringify({ ...fixture, isKnockout: true }),
     });
     const data = await res.json();
     setPrediction(data);
@@ -270,17 +266,14 @@ function KnockoutCard({ fixture }) {
       <div className="flex items-center justify-between gap-2">
         <div className={`flex-1 text-center rounded-xl p-3 transition-all duration-700 ${
           prediction && isHomeWinner ? "shadow-[0_0_25px_rgba(74,222,128,0.4)] bg-gray-800" :
-          prediction && isAwayWinner ? "shadow-[0_0_25px_rgba(239,68,68,0.4)] bg-gray-800" :
-          prediction && isDraw ? "shadow-[0_0_25px_rgba(234,179,8,0.4)] bg-gray-800" : ""
+          prediction && isAwayWinner ? "shadow-[0_0_25px_rgba(239,68,68,0.4)] bg-gray-800" : ""
         }`}>
           <FlagImage team={fixture.home} />
           <p className={`text-sm font-semibold mt-2 transition-all duration-700 ${
-            prediction && isHomeWinner ? "text-green-400" :
-            prediction && isDraw ? "text-yellow-400" : "text-white"
+            prediction && isHomeWinner ? "text-green-400" : "text-white"
           }`}>{fixture.home}</p>
           <p className="text-gray-500 text-xs mt-0.5">Home</p>
-          {prediction && isHomeWinner && <p className="text-green-400 text-xs font-bold mt-1 animate-pulse">Winner</p>}
-          {prediction && isDraw && <p className="text-yellow-400 text-xs font-bold mt-1 animate-pulse">Draw</p>}
+          {prediction && isHomeWinner && <p className="text-green-400 text-xs font-bold mt-1 animate-pulse">Goes Through</p>}
         </div>
 
         <div className="text-center px-2">
@@ -291,7 +284,17 @@ function KnockoutCard({ fixture }) {
                 {" — "}
                 <AnimatedScore value={prediction.awayScore} />
               </p>
-              <p className="text-gray-500 text-xs mt-1">Predicted</p>
+              <p className="text-gray-500 text-xs mt-1">90 mins</p>
+              {prediction.goesToET && (
+                <p className="text-blue-400 text-xs mt-1 font-semibold">
+                  ET: <AnimatedScore value={prediction.totalHome} />—<AnimatedScore value={prediction.totalAway} />
+                </p>
+              )}
+              {prediction.goesToPenalties && (
+                <p className="text-yellow-400 text-xs mt-1 font-bold animate-pulse">
+                  {prediction.penaltyWinner} wins on Penalties
+                </p>
+              )}
             </div>
           ) : (
             <p className="text-gray-600 text-xl font-bold">vs</p>
@@ -300,17 +303,14 @@ function KnockoutCard({ fixture }) {
 
         <div className={`flex-1 text-center rounded-xl p-3 transition-all duration-700 ${
           prediction && isAwayWinner ? "shadow-[0_0_25px_rgba(74,222,128,0.4)] bg-gray-800" :
-          prediction && isHomeWinner ? "shadow-[0_0_25px_rgba(239,68,68,0.4)] bg-gray-800" :
-          prediction && isDraw ? "shadow-[0_0_25px_rgba(234,179,8,0.4)] bg-gray-800" : ""
+          prediction && isHomeWinner ? "shadow-[0_0_25px_rgba(239,68,68,0.4)] bg-gray-800" : ""
         }`}>
           <FlagImage team={fixture.away} />
           <p className={`text-sm font-semibold mt-2 transition-all duration-700 ${
-            prediction && isAwayWinner ? "text-green-400" :
-            prediction && isDraw ? "text-yellow-400" : "text-white"
+            prediction && isAwayWinner ? "text-green-400" : "text-white"
           }`}>{fixture.away}</p>
           <p className="text-gray-500 text-xs mt-0.5">Away</p>
-          {prediction && isAwayWinner && <p className="text-green-400 text-xs font-bold mt-1 animate-pulse">Winner</p>}
-          {prediction && isDraw && <p className="text-yellow-400 text-xs font-bold mt-1 animate-pulse">Draw</p>}
+          {prediction && isAwayWinner && <p className="text-green-400 text-xs font-bold mt-1 animate-pulse">Goes Through</p>}
         </div>
       </div>
 
@@ -324,11 +324,8 @@ function KnockoutCard({ fixture }) {
             <p className="text-white mt-1">{prediction.homeWin}%</p>
           </div>
           <div className="text-center">
-            <p className="text-gray-400 mb-1">Draw</p>
-            <div className="w-20 bg-gray-800 rounded-full h-1.5">
-              <div className="bg-yellow-500 h-1.5 rounded-full transition-all duration-1000" style={{ width: `${prediction.draw}%` }} />
-            </div>
-            <p className="text-white mt-1">{prediction.draw}%</p>
+            <p className="text-gray-400 mb-1">Method</p>
+            <p className="text-white font-semibold mt-1">{prediction.method}</p>
           </div>
           <div className="text-center">
             <p className="text-gray-400 mb-1">{fixture.away}</p>
@@ -355,9 +352,8 @@ function BigMatchCard({ fixture, label }) {
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const isDraw = prediction?.winner?.toLowerCase().includes("draw");
-  const isHomeWinner = !isDraw && prediction?.winner?.toLowerCase().includes(fixture.home.toLowerCase());
-  const isAwayWinner = !isDraw && prediction?.winner?.toLowerCase().includes(fixture.away.toLowerCase());
+  const isHomeWinner = prediction?.winner?.toLowerCase().includes(fixture.home.toLowerCase());
+  const isAwayWinner = prediction?.winner?.toLowerCase().includes(fixture.away.toLowerCase());
 
   async function predict() {
     setLoading(true);
@@ -365,7 +361,7 @@ function BigMatchCard({ fixture, label }) {
     const res = await fetch("/api/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(fixture),
+      body: JSON.stringify({ ...fixture, isKnockout: true }),
     });
     const data = await res.json();
     setPrediction(data);
@@ -401,15 +397,6 @@ function BigMatchCard({ fixture, label }) {
           0%, 100% { box-shadow: 0 0 20px rgba(239,68,68,0.3); }
           50% { box-shadow: 0 0 60px rgba(239,68,68,0.8); }
         }
-        @keyframes goldGlowPulse {
-          0%, 100% { box-shadow: 0 0 20px rgba(234,179,8,0.3); }
-          50% { box-shadow: 0 0 60px rgba(234,179,8,0.8); }
-        }
-        @keyframes starSpin {
-          0% { transform: rotate(0deg) scale(1); }
-          50% { transform: rotate(180deg) scale(1.2); }
-          100% { transform: rotate(360deg) scale(1); }
-        }
         .shimmer-text {
           background: linear-gradient(90deg, #4ade80, #facc15, #60a5fa, #4ade80);
           background-size: 200% auto;
@@ -420,8 +407,6 @@ function BigMatchCard({ fixture, label }) {
         .float-in { animation: floatUp 0.6s ease forwards; }
         .glow-winner { animation: glowPulse 2s ease-in-out infinite; }
         .glow-loser { animation: redGlowPulse 2s ease-in-out infinite; }
-        .glow-draw { animation: goldGlowPulse 2s ease-in-out infinite; }
-        .star-spin { animation: starSpin 4s linear infinite; }
       `}</style>
 
       <div className="text-center mb-4">
@@ -433,19 +418,17 @@ function BigMatchCard({ fixture, label }) {
         <div className="text-center mb-6 text-xs text-gray-600">{fixture.date} · {fixture.time}</div>
 
         <div className="flex items-center justify-between gap-4 mb-6">
-
           <div className={`flex-1 text-center rounded-2xl p-5 transition-all duration-700 ${
             prediction && isHomeWinner ? "glow-winner bg-gray-800" :
-            prediction && isAwayWinner ? "glow-loser bg-gray-800" :
-            prediction && isDraw ? "glow-draw bg-gray-800" : "bg-gray-800"
+            prediction && isAwayWinner ? "glow-loser bg-gray-800" : "bg-gray-800"
           }`}>
             <FlagImage team={fixture.home} />
             <p className={`text-base font-bold mt-3 transition-all duration-700 ${
-              prediction && isHomeWinner ? "text-green-400" :
-              prediction && isDraw ? "text-yellow-400" : "text-white"
+              prediction && isHomeWinner ? "text-green-400" : "text-white"
             }`}>{fixture.home}</p>
-            {prediction && isHomeWinner && <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>}
-            {prediction && isDraw && <p className="text-yellow-400 text-xs font-bold mt-2 animate-pulse tracking-widest">DRAW</p>}
+            {prediction && isHomeWinner && (
+              <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>
+            )}
           </div>
 
           <div className="text-center px-1">
@@ -456,7 +439,20 @@ function BigMatchCard({ fixture, label }) {
                   <span className="text-gray-600 mx-2">—</span>
                   <AnimatedScore value={prediction.awayScore} />
                 </p>
-                <p className="text-gray-600 text-xs mt-1">Predicted</p>
+                <p className="text-gray-600 text-xs mt-1">90 mins</p>
+                {prediction.goesToET && (
+                  <p className="text-blue-400 text-xs mt-2 font-semibold float-in">
+                    ET: <AnimatedScore value={prediction.totalHome} />—<AnimatedScore value={prediction.totalAway} />
+                  </p>
+                )}
+                {prediction.goesToPenalties && (
+                  <p className="text-yellow-400 text-xs mt-2 font-bold animate-pulse float-in">
+                    {prediction.penaltyWinner} wins on Penalties
+                  </p>
+                )}
+                {!prediction.goesToET && !prediction.goesToPenalties && (
+                  <p className="text-gray-500 text-xs mt-1">Full Time</p>
+                )}
               </div>
             ) : (
               <p className="text-gray-700 text-2xl font-bold">vs</p>
@@ -465,18 +461,16 @@ function BigMatchCard({ fixture, label }) {
 
           <div className={`flex-1 text-center rounded-2xl p-5 transition-all duration-700 ${
             prediction && isAwayWinner ? "glow-winner bg-gray-800" :
-            prediction && isHomeWinner ? "glow-loser bg-gray-800" :
-            prediction && isDraw ? "glow-draw bg-gray-800" : "bg-gray-800"
+            prediction && isHomeWinner ? "glow-loser bg-gray-800" : "bg-gray-800"
           }`}>
             <FlagImage team={fixture.away} />
             <p className={`text-base font-bold mt-3 transition-all duration-700 ${
-              prediction && isAwayWinner ? "text-green-400" :
-              prediction && isDraw ? "text-yellow-400" : "text-white"
+              prediction && isAwayWinner ? "text-green-400" : "text-white"
             }`}>{fixture.away}</p>
-            {prediction && isAwayWinner && <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>}
-            {prediction && isDraw && <p className="text-yellow-400 text-xs font-bold mt-2 animate-pulse tracking-widest">DRAW</p>}
+            {prediction && isAwayWinner && (
+              <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>
+            )}
           </div>
-
         </div>
 
         {prediction && (
@@ -489,11 +483,8 @@ function BigMatchCard({ fixture, label }) {
               <p className="text-white mt-1">{prediction.homeWin}%</p>
             </div>
             <div className="text-center">
-              <p className="text-gray-400 mb-1">Draw</p>
-              <div className="w-20 bg-gray-800 rounded-full h-1.5">
-                <div className="bg-yellow-500 h-1.5 rounded-full transition-all duration-1000" style={{ width: `${prediction.draw}%` }} />
-              </div>
-              <p className="text-white mt-1">{prediction.draw}%</p>
+              <p className="text-gray-400 mb-1">Decided by</p>
+              <p className="text-white font-semibold mt-1 text-center">{prediction.method}</p>
             </div>
             <div className="text-center">
               <p className="text-gray-400 mb-1">{fixture.away}</p>
@@ -512,25 +503,6 @@ function BigMatchCard({ fixture, label }) {
         >
           {loading ? "Analyzing..." : prediction ? "Predict Again" : "Predict →"}
         </button>
-      </div>
-    </div>
-  );
-}
-
-function BigMatchRound({ fixtures, round, label }) {
-  const confirmed = fixtures.filter(f => f.confirmed).length;
-  const total = fixtures.length;
-
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-white font-semibold text-lg">{round}</h2>
-        <span className="text-gray-500 text-xs">{confirmed}/{total} fixtures confirmed</span>
-      </div>
-      <div className="flex flex-col gap-8 items-center">
-        {fixtures.map((f) => (
-          <BigMatchCard key={f.id} fixture={f} label={label} />
-        ))}
       </div>
     </div>
   );
@@ -555,12 +527,30 @@ function KnockoutRound({ fixtures, round }) {
   );
 }
 
+function BigMatchRound({ fixtures, round, label }) {
+  const confirmed = fixtures.filter(f => f.confirmed).length;
+  const total = fixtures.length;
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-white font-semibold text-lg">{round}</h2>
+        <span className="text-gray-500 text-xs">{confirmed}/{total} fixtures confirmed</span>
+      </div>
+      <div className="flex flex-col gap-8 items-center">
+        {fixtures.map((f) => (
+          <BigMatchCard key={f.id} fixture={f} label={label} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState("group");
 
   return (
     <main className="min-h-screen bg-gray-950 text-white">
-
       <div className="text-center pt-10 pb-6 px-6">
         <p className="text-green-400 text-xs font-semibold tracking-widest uppercase mb-3">FIFA World Cup 2026</p>
         <h1 className="text-4xl font-bold tracking-tight mb-2">Match Predictor</h1>
@@ -609,7 +599,6 @@ export default function Home() {
         {activeTab === "sf" && <BigMatchRound fixtures={knockoutFixtures.sf} round="Semi Finals" label="Semi Final" />}
         {activeTab === "final" && <BigMatchRound fixtures={knockoutFixtures.final} round="The Final" label="🏆 FIFA World Cup Final 2026" />}
       </div>
-
     </main>
   );
 }
