@@ -94,7 +94,7 @@ export const fixtures = [
   { id: 66, home: "Senegal", away: "Iraq", date: "2026-06-27", time: "12:30 AM ET", venue: "BMO Field, Toronto", matchday: "Matchday 3", group: "Group I" },
   { id: 67, home: "Algeria", away: "Austria", date: "2026-06-28", time: "7:30 AM ET", venue: "Estadio Azteca, Mexico City", matchday: "Matchday 3", group: "Group J" },
   { id: 68, home: "Jordan", away: "Argentina", date: "2026-06-28", time: "7:30 AM ET", venue: "GEHA Field, Kansas City", matchday: "Matchday 3", group: "Group J" },
-  { id: 69, home: "Portugal", away: "Colombia", date: "2026-06-28", time: "5:00 AM ET", venue: "NRG Stadium, Houston", matchday: "Matchday 3", group: "Group K" },
+  { id: 69, home: "Colombia", away: "Portugal", date: "2026-06-28", time: "5:00 AM ET", venue: "NRG Stadium, Houston", matchday: "Matchday 3", group: "Group K" },
   { id: 70, home: "DR Congo", away: "Uzbekistan", date: "2026-06-28", time: "5:00 AM ET", venue: "Estadio BBVA, Monterrey", matchday: "Matchday 3", group: "Group K" },
   { id: 71, home: "Panama", away: "England", date: "2026-06-28", time: "2:30 AM ET", venue: "BMO Field, Toronto", matchday: "Matchday 3", group: "Group L" },
   { id: 72, home: "Croatia", away: "Ghana", date: "2026-06-28", time: "2:30 AM ET", venue: "Gillette Stadium, Boston", matchday: "Matchday 3", group: "Group L" },

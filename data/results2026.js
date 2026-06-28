@@ -68,26 +68,48 @@ export const results2026 = [
   { home: "Uruguay", away: "Spain", score: "0-1", date: "2026-06-27", group: "Group H", note: "Spain beat Uruguay and advance to round of 32" },
   { home: "New Zealand", away: "Belgium", score: "1-5", date: "2026-06-27", group: "Group G", note: "Belgium Dominated the match and the score" },
   { home: "Egypt", away: "Iran", score: "1-1", date: "2026-06-27", group: "Group G", note: "Iran and Eqypt share points" },
+  { home: "Panama", away: "England", score: "0-2", date: "2026-06-28", group: "Group L", note: "England  won the match easily and dominated it" },
+  { home: "Croatia", away: "Ghana", score: "2-1", date: "2026-06-28", group: "Group L", note: "Croatia beat Ghana comfortably" },
+  { home: "Colombia", away: "Portugal", score: "0-0", date: "2026-06-28", group: "Group K", note: "Colombia and Portugal played a goalless and boring match" },
+  { home: "DR Congo", away: "Uzbekistan", score: "3-1", date: "2026-06-28", group: "Group K", note: "DR Congo had a comfortable and convincing win" },
+  { home: "Algeria", away: "Austria", score: "3-3", date: "2026-06-28", group: "Group J", note: "Algeria and Austria played a entertaining match of football with late drama" },
+  { home: "Jordan", away: "Argentina", score: "1-3", date: "2026-06-28", group: "Group J", note: "Argentina won easily against Jordan" },
 ];
 
 export const keyInsights = [
-  "Canada are in electric form — 6-0 vs Qatar but drew 1-1 with Bosnia. Inconsistent.",
-  "Morocco drew with Brazil and beat Scotland — defensively brilliant, do not underestimate them.",
-  "Germany look ruthless — 7-1 vs Curaçao and 2-1 vs Ivory Coast.",
-  "DR Congo held Portugal 1-1 — African teams are very competitive in this tournament.",
-  "Spain drew 0-0 with Cabo Verde — massive upset, Spain looked toothless in attack.",
-  "Japan beat Tunisia 4-0 and drew 2-2 with Netherlands — Japan always punch above their weight.",
-  "Brazil drew with Morocco but bounced back 3-0 vs Haiti — finding their form.",
-  "England look strong — 4-2 against Croatia is a statement result.",
-  "France are clinical — 3-1 vs Senegal, looking like genuine contenders.",
-  "Argentina comfortable — 3-0 vs Algeria, Messi in control.",
-  "Norway beat Iraq 4-1, dark horse contenders.",
-  "Netherlands beat Sweden 5-1 after drawing with Japan — very dangerous team.",
-  "USA beat Paraguay 4-1 and Australia 2-0 — thriving on home soil.",
-  "Paraguay beat Türkiye — upsets keep happening.",
-  "Upsets everywhere — Cabo Verde vs Spain, DR Congo vs Portugal, Japan vs Netherlands.",
-  "Home advantage is real — USA, Mexico, Canada all performing strongly.",
+  // Strong Contenders & Title Favourites
+  "After the group stage, **France** emerge as one of the clearest favourites to win the 2026 World Cup. With clinical finishing, high pressing, and excellent balance across the pitch, they have looked the most complete team (3-1 vs Senegal, 3-0 vs Iraq, 4-1 vs Norway).",
+  "**Argentina** remain serious title contenders. Controlled midfield, defensive solidity, and Messi’s magic make them extremely dangerous. Comfortable wins over Algeria (3-0) and Jordan (3-1) show they are peaking at the right time.",
+  "**Netherlands** are dark horse favourites with explosive attacking transitions and depth. Their 5-1 demolition of Sweden after drawing with Japan highlights their danger in knockout football.",
+  "**Brazil** have found their rhythm after an early scare vs Morocco. Strong wins over Haiti and Scotland prove they have the attacking quality to go all the way.",
+  "**England** possess immense physicality, set-piece threat, and squad depth. Despite a frustrating 0-0 vs Ghana, their 4-2 win over Croatia keeps them among the top contenders.",
+
+  // Tactical Insights
+  "Morocco’s defensive masterclass continues — extremely well-organized low block, disciplined pressing, and dangerous counters. Drawing with Brazil and beating Scotland makes them one of the toughest teams to face in knockouts.",
+  "Japan showcased superb tactical discipline, quick transitions, and high work rate — earning a draw against Netherlands and a dominant 4-0 win over Tunisia.",
+  "Switzerland played with great structure and midfield control, comfortably topping Group B with impressive victories including 4-1 vs Bosnia and 2-1 vs Canada.",
+  "Germany began with ruthless high-intensity pressing (7-1 vs Curaçao) but were tactically exposed in a shocking 2-1 loss to Ecuador.",
+  "USA benefited hugely from home advantage and direct, energetic football early on, but defensive vulnerabilities were exposed in their 3-2 loss to Türkiye.",
+
+  // Underdogs & Surprise Performers
+  "Cabo Verde are the biggest fairy tale of the group stage — held Spain to a 0-0 draw and Uruguay to 2-2 through incredible defensive organization and fighting spirit.",
+  "DR Congo pulled off one of the greatest upsets by holding Portugal to a 1-1 draw with compact shape and clinical counter-attacks.",
+  "Türkiye produced a dramatic comeback victory over USA (3-2), showing resilience, tactical adaptability, and killer instinct in the final moments.",
+  "Ecuador stunned Germany 2-1 with smart defensive setup and lightning counters — a massive result that shook Group E.",
+  "Ghana and Iran excelled at low-block defending, frustrating stronger nations (Ghana held England 0-0, Iran held Belgium 0-0).",
+  "South Africa showed great resilience in Group A, securing advancement with a crucial 1-0 win over South Korea.",
+
+  // Other Key Observations
+  "Canada were highly inconsistent but capable of brilliance — thrashing Qatar 6-0 while struggling to a 1-1 draw with Bosnia.",
+  "Portugal and Belgium failed to meet expectations, dropping unnecessary points and lacking cutting edge in the final third.",
+  "This World Cup has seen an unusually high number of upsets and competitive matches, proving the expanded 48-team format has increased unpredictability.",
+  "Home advantage has been significant — Mexico, USA, and Canada all performed strongly in front of passionate home crowds.",
+  "Attacking football has thrived with several high-scoring games: Germany 7-1, Canada 6-0, Netherlands 5-1, Senegal 5-0, and Belgium 5-1.",
+
+  // Overall Favourites Summary
+  "Current top favourites to win the 2026 FIFA World Cup after group stage: **France, Argentina, Netherlands, Brazil, and England**. Morocco and Japan are the most dangerous outsiders capable of causing major upsets in the knockout stages.",
 ];
+
 
 export function getResult(home, away) {
   return results2026.find(
