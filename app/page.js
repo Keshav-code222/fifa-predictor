@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { fixtures } from "@/data/fixtures";
 import { teamFlags } from "@/data/teamFlags";
-import { getResult } from "@/data/results2026";
+import { getResult, getKnockoutResult } from "@/data/results2026";
 import { knockoutFixtures } from "@/data/knockout";
 
 const TABS = [
@@ -230,6 +230,9 @@ function KnockoutCard({ fixture }) {
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const actualResult = getKnockoutResult(fixture.id);
+  const isPlayed = !!actualResult;
+
   const isHomeWinner = prediction?.winner?.toLowerCase().includes(fixture.home.toLowerCase());
   const isAwayWinner = prediction?.winner?.toLowerCase().includes(fixture.away.toLowerCase());
 
@@ -252,6 +255,47 @@ function KnockoutCard({ fixture }) {
         <p className="text-gray-600 text-2xl mb-2">⚽</p>
         <p className="text-gray-600 text-sm font-semibold">To Be Decided</p>
         <p className="text-gray-700 text-xs mt-1">Fixture not confirmed yet</p>
+      </div>
+    );
+  }
+
+  if (isPlayed) {
+    const homeWins = actualResult.winner === fixture.home;
+    return (
+      <div className="bg-gray-900 rounded-2xl p-5 flex flex-col gap-4">
+        <div className="flex items-center justify-between text-xs text-gray-500">
+          <span>{fixture.date}</span>
+          <span>{fixture.time}</span>
+        </div>
+
+        <div className="flex items-center justify-between gap-2">
+          <div className={`flex-1 text-center rounded-xl p-3 ${
+            homeWins ? "shadow-[0_0_25px_rgba(74,222,128,0.4)] bg-gray-800" : "shadow-[0_0_25px_rgba(239,68,68,0.4)] bg-gray-800"
+          }`}>
+            <FlagImage team={fixture.home} />
+            <p className={`text-sm font-semibold mt-2 ${homeWins ? "text-green-400" : "text-white"}`}>{fixture.home}</p>
+            {homeWins && <p className="text-green-400 text-xs font-bold mt-1 animate-pulse">Goes Through</p>}
+          </div>
+
+          <div className="text-center px-2">
+            <p className="text-2xl font-bold text-white">{actualResult.score}</p>
+            {actualResult.et && <p className="text-blue-400 text-xs mt-1">ET: {actualResult.etScore}</p>}
+            {actualResult.penalties && <p className="text-yellow-400 text-xs mt-1 font-bold animate-pulse">{actualResult.winner} on Pens {actualResult.penaltyScore}</p>}
+            {!actualResult.et && !actualResult.penalties && <p className="text-gray-500 text-xs mt-1">Full Time</p>}
+          </div>
+
+          <div className={`flex-1 text-center rounded-xl p-3 ${
+            !homeWins ? "shadow-[0_0_25px_rgba(74,222,128,0.4)] bg-gray-800" : "shadow-[0_0_25px_rgba(239,68,68,0.4)] bg-gray-800"
+          }`}>
+            <FlagImage team={fixture.away} />
+            <p className={`text-sm font-semibold mt-2 ${!homeWins ? "text-green-400" : "text-white"}`}>{fixture.away}</p>
+            {!homeWins && <p className="text-green-400 text-xs font-bold mt-1 animate-pulse">Goes Through</p>}
+          </div>
+        </div>
+
+        <div className="text-center">
+          <span className="text-xs text-gray-500 uppercase tracking-widest">Match Completed</span>
+        </div>
       </div>
     );
   }
@@ -324,7 +368,7 @@ function KnockoutCard({ fixture }) {
             <p className="text-white mt-1">{prediction.homeWin}%</p>
           </div>
           <div className="text-center">
-            <p className="text-gray-400 mb-1">Method</p>
+            <p className="text-gray-400 mb-1">Decided by</p>
             <p className="text-white font-semibold mt-1">{prediction.method}</p>
           </div>
           <div className="text-center">
@@ -352,6 +396,9 @@ function BigMatchCard({ fixture, label }) {
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const actualResult = getKnockoutResult(fixture.id);
+  const isPlayed = !!actualResult;
+
   const isHomeWinner = prediction?.winner?.toLowerCase().includes(fixture.home.toLowerCase());
   const isAwayWinner = prediction?.winner?.toLowerCase().includes(fixture.away.toLowerCase());
 
@@ -374,6 +421,48 @@ function BigMatchCard({ fixture, label }) {
         <p className="text-4xl mb-3">⚽</p>
         <p className="text-gray-500 text-sm font-semibold">{label}</p>
         <p className="text-gray-700 text-xs mt-2">To Be Decided</p>
+      </div>
+    );
+  }
+
+  if (isPlayed) {
+    const homeWins = actualResult.winner === fixture.home;
+    return (
+      <div className="w-full max-w-lg mx-auto bg-gray-900 rounded-3xl p-7 border border-gray-800">
+        <div className="text-center mb-4">
+          <span className="text-xs font-bold tracking-widest uppercase text-gray-400">{label}</span>
+        </div>
+        <div className="text-center mb-1 text-xs text-gray-500">{fixture.venue}</div>
+        <div className="text-center mb-6 text-xs text-gray-600">{fixture.date} · {fixture.time}</div>
+
+        <div className="flex items-center justify-between gap-4 mb-6">
+          <div className={`flex-1 text-center rounded-2xl p-5 ${
+            homeWins ? "shadow-[0_0_40px_rgba(74,222,128,0.5)] bg-gray-800" : "shadow-[0_0_40px_rgba(239,68,68,0.5)] bg-gray-800"
+          }`}>
+            <FlagImage team={fixture.home} />
+            <p className={`text-base font-bold mt-3 ${homeWins ? "text-green-400" : "text-white"}`}>{fixture.home}</p>
+            {homeWins && <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>}
+          </div>
+
+          <div className="text-center px-1">
+            <p className="text-4xl font-bold text-white">{actualResult.score}</p>
+            {actualResult.et && <p className="text-blue-400 text-xs mt-2">ET: {actualResult.etScore}</p>}
+            {actualResult.penalties && <p className="text-yellow-400 text-xs mt-2 font-bold animate-pulse">{actualResult.winner} on Pens {actualResult.penaltyScore}</p>}
+            {!actualResult.et && !actualResult.penalties && <p className="text-gray-500 text-xs mt-1">Full Time</p>}
+          </div>
+
+          <div className={`flex-1 text-center rounded-2xl p-5 ${
+            !homeWins ? "shadow-[0_0_40px_rgba(74,222,128,0.5)] bg-gray-800" : "shadow-[0_0_40px_rgba(239,68,68,0.5)] bg-gray-800"
+          }`}>
+            <FlagImage team={fixture.away} />
+            <p className={`text-base font-bold mt-3 ${!homeWins ? "text-green-400" : "text-white"}`}>{fixture.away}</p>
+            {!homeWins && <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>}
+          </div>
+        </div>
+
+        <div className="text-center">
+          <span className="text-xs text-gray-500 uppercase tracking-widest">Match Completed</span>
+        </div>
       </div>
     );
   }
@@ -426,9 +515,7 @@ function BigMatchCard({ fixture, label }) {
             <p className={`text-base font-bold mt-3 transition-all duration-700 ${
               prediction && isHomeWinner ? "text-green-400" : "text-white"
             }`}>{fixture.home}</p>
-            {prediction && isHomeWinner && (
-              <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>
-            )}
+            {prediction && isHomeWinner && <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>}
           </div>
 
           <div className="text-center px-1">
@@ -467,9 +554,7 @@ function BigMatchCard({ fixture, label }) {
             <p className={`text-base font-bold mt-3 transition-all duration-700 ${
               prediction && isAwayWinner ? "text-green-400" : "text-white"
             }`}>{fixture.away}</p>
-            {prediction && isAwayWinner && (
-              <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>
-            )}
+            {prediction && isAwayWinner && <p className="text-green-400 text-xs font-bold mt-2 animate-pulse tracking-widest">✦ WINNER</p>}
           </div>
         </div>
 
@@ -484,7 +569,7 @@ function BigMatchCard({ fixture, label }) {
             </div>
             <div className="text-center">
               <p className="text-gray-400 mb-1">Decided by</p>
-              <p className="text-white font-semibold mt-1 text-center">{prediction.method}</p>
+              <p className="text-white font-semibold mt-1">{prediction.method}</p>
             </div>
             <div className="text-center">
               <p className="text-gray-400 mb-1">{fixture.away}</p>

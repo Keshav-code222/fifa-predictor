@@ -111,10 +111,20 @@ export const keyInsights = [
 ];
 
 
+
+export const knockoutResults = [
+  // ROUND OF 32
+  { id: "r32-1", home: "South Africa", away: "Canada", score: "0-1", et: false, penalties: false, penaltyScore: null, winner: "Canada", note: "Canada won in the last couple of minutes" },
+];
+
 export function getResult(home, away) {
   return results2026.find(
     (r) =>
       r.home.toLowerCase() === home.toLowerCase() &&
       r.away.toLowerCase() === away.toLowerCase()
   );
+}
+
+export function getKnockoutResult(id) {
+  return knockoutResults.find(r => r.id === id);
 }
