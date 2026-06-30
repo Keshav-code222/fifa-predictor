@@ -115,6 +115,8 @@ export const keyInsights = [
 export const knockoutResults = [
   // ROUND OF 32
   { id: "r32-1", home: "South Africa", away: "Canada", score: "0-1", et: false, penalties: false, penaltyScore: null, winner: "Canada", note: "Canada won in the last couple of minutes" },
+  { id: "r32-2", home: "Brazil", away: "Japan", score: "2-1", et: false, penalties: false, penaltyScore: null, winner: "Brazil", note: "Brazil completed a comeback to beat Japan" },
+  { id: "r32-3", home: "Germany", away: "Paraguay", score: "1-1", et: true, penalties: true, penaltyScore: "3-4", winner: "Paraguay", note: "Another shocker in the world cup and this time it's Paraguay" },
 ];
 
 export function getResult(home, away) {
