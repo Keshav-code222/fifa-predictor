@@ -120,6 +120,7 @@ export const knockoutResults = [
   { id: "r32-4", home: "Netherlands", away: "Morocco", score: "1-1", et: true, etScore: "0-0", penalties: true, penaltyScore: "2-3", winner: "Morocco", note: "Morocco did a comeback to beat Dutch" },
   { id: "r32-5", home: "Ivory Coast", away: "Norway", score: "1-2", et: false, penalties: false, penaltyScore: null, winner: "Norway", note: "Norway beat Ivory Coast easily" },
   { id: "r32-6", home: "France", away: "Sweden", score: "3-0", et: false, penalties: false, penaltyScore: null, winner: "France", note: "France were clinical and comfortable against sweden" },
+  { id: "r32-7", home: "Mexico", away: "Ecuador", score: "2-0", et: false, penalties: false, penaltyScore: null, winner: "Mexico", note: "Mexico won and dominated the match" },
 ];
 
 export function getResult(home, away) {
