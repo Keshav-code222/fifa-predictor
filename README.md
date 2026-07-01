@@ -8,7 +8,7 @@ An AI powered match prediction tool for the FIFA World Cup 2026. Select any fixt
 
 ## What it does
 
-- Browse all 66 group stage fixtures grouped by matchday
+- Browse all 72 group stage fixtures grouped by matchday along with knockout matches 
 - Select any match to see teams, venue, and kickoff time
 - Get an AI prediction with win probability bars
 - Green glow on predicted winner, red glow on loser, yellow on draw
