@@ -126,6 +126,7 @@ export const knockoutResults = [
   { id: "r32-10", home: "USA", away: "Bosnia and Herzegovina", score: "2-0", et: false, penalties: false, winner: "USA", note: "USA beat them easily" },
   { id: "r32-11", home: "Spain", away: "Austria", score: "3-0", et: false, penalties: false, winner: "Spain", note: "Spain beat Austria easily" },
   { id: "r32-12", home: "Portugal", away: "Croatia", score: "2-1", et: false, penlaties: false, winner: "Portugal", note: "Portugal completed a comeback to beat Croatia" },
+  { id: "r32-13", home: "Switzerland", away: "Algeria", score: "2-0", et: false, penlaties: false, winner: "Switzerland", note: "Switzerland won comfortably" },
 ];
 
 export function getResult(home, away) {
