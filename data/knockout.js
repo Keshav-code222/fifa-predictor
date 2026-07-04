@@ -24,8 +24,8 @@ export const knockoutFixtures = {
     { id: "r16-4", home: "Mexico", away: "England", date: "2026-07-06", time: "5:30 AM IST", venue: "Mexico City Stadium, Mexico City", confirmed: true },
     { id: "r16-5", home: "Portugal", away: "Spain", date: "2026-07-07", time: "12:30 AM IST", venue: "Dallas Stadium, Arlington", confirmed: true },
     { id: "r16-6", home: "Belgium", away: "USA", date: "2026-07-07", time: "5:30 AM IST", venue: "Seattle Stadium, Seattle", confirmed: true },
-    { id: "r16-7", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
-    { id: "r16-8", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
+    { id: "r16-7", home: "Argentina", away: "Egypt", date: "2026-07-07", time: "9:30 PM IST", venue: "Atlanta Stadium, Atlanta", confirmed: true },
+    { id: "r16-8", home: "Switzerland", away: "Colombia", date: "2026-07-08", time: "1:30 AM IST", venue: "BC Vancouver, Vancouver", confirmed: true },
   ],
   qf: [
     { id: "qf-1", home: "TBD", away: "TBD", date: "TBD", time: "TBD", venue: "TBD", confirmed: false },
