@@ -130,6 +130,10 @@ export const knockoutResults = [
   { id: "r32-14", home: "Australia", away: "Egypt", score: "1-1", score: "1-1", et: true, etScore: "0-0", penalties: true, penaltyScore: "2-4", winner: "Egypt", note: "A dramatic match in which no team wanated to give up and both teams kept finghting but in the end it was Egypt who beat Australia in penalties" },
   { id: "r32-15", home: "Argentina", away: "Cabo Verde", score: "1-1", et: true, etScore: "2-1", penalties: false, winner: "Argentina", note: "A amazing match in which the underdogs Cabo Verde gave a hard time to the Argentina who are world cup favorites and Argentina beat them in extra time" },
   { id: "r32-16", home: "Colombia", away: "Ghana", score: "1-0", et: false, penalties: false, winner: "Colombia", note: "Colombia beat Ghana and book their place in the round of 16 against Switzerland" },
+
+  // ROUND OF 16
+  { id: "r16-1", home: "Canada", away: "Morocco", score: "0-3", et: false, penalties: false, winner: "Morocco", note: "Canada dominated the first half but Morocco were the better side in the 2nd half and ended the fairytale run of Canada" },
+  { id: "r16-2", home: "Paraguay", away: "France", score: "0-1", et: false, penalties: false, winner: "France", note: "France won the match by getting a penalty in the 70th minute and Mbappe scored the penalty and took France to quarterfinal" },
 ];
 
 export function getResult(home, away) {
