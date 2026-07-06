@@ -134,6 +134,8 @@ export const knockoutResults = [
   // ROUND OF 16
   { id: "r16-1", home: "Canada", away: "Morocco", score: "0-3", et: false, penalties: false, winner: "Morocco", note: "Canada dominated the first half but Morocco were the better side in the 2nd half and ended the fairytale run of Canada" },
   { id: "r16-2", home: "Paraguay", away: "France", score: "0-1", et: false, penalties: false, winner: "France", note: "France won the match by getting a penalty in the 70th minute and Mbappe scored the penalty and took France to quarterfinal" },
+  { id: "r16-3", home: "Brazil", away: "Norway", score: "1-2", et: false, penalties: false, winner: "Norway", note: "Norway beat Brazil and caused a huge upset in the world cup and booked their places for quarterfinal, Haaland scored 2 goals" },
+  { id: "r16-4", home: "Mexico", away: "England", score: "2-3", et: false, penlaties: false, winner: "England", note: "England best Mexico 3-2, thanks to the brace scored by Jude Bellingham despite England reducing to 10 men after red card to Jarell Quansah" },
 ];
 
 export function getResult(home, away) {
