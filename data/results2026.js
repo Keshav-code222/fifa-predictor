@@ -138,6 +138,8 @@ export const knockoutResults = [
   { id: "r16-4", home: "Mexico", away: "England", score: "2-3", et: false, penlaties: false, winner: "England", note: "England best Mexico 3-2, thanks to the brace scored by Jude Bellingham despite England reducing to 10 men after red card to Jarell Quansah" },
   { id: "r16-5", home: "Portugal", away: "Spain", score: "0-1", et: false, penalties: false, winner: "Spain", note: "Spain beat Portugal in the last couple of minutes of the match" },
   { id: "r16-6", home: "USA", away: "Belgium", score: "1-4", et: false, penlaties: false, winner: "Belgium", note: "Belgium dominated the match" },
+  { id: "r16-7", home: "Argentina", away: "Egypt", score: "3-2", et: false, penalties: false, winner: "Argentina", note: "Argentina scored the winning goal in the last minute of the match and completed the comeback after going 0-2" },
+  { id: "r16-8", home: "Switzerland", away: "Colombia", score: "0-0", et: true, etScore: "0-0", penalties: true, penaltyScore: "4-3", note: "Switzerland beat Colombia in the pens and book their places in the quarterfinal" },
 ];
 
 export function getResult(home, away) {
