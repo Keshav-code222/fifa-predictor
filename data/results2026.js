@@ -140,6 +140,9 @@ export const knockoutResults = [
   { id: "r16-6", home: "USA", away: "Belgium", score: "1-4", et: false, penlaties: false, winner: "Belgium", note: "Belgium dominated the match" },
   { id: "r16-7", home: "Argentina", away: "Egypt", score: "3-2", et: false, penalties: false, winner: "Argentina", note: "Argentina scored the winning goal in the last minute of the match and completed the comeback after going 0-2" },
   { id: "r16-8", home: "Switzerland", away: "Colombia", score: "0-0", et: true, etScore: "0-0", penalties: true, penaltyScore: "4-3", note: "Switzerland beat Colombia in the pens and book their places in the quarterfinal" },
+
+  // QUARTERFINAL
+  { id: "qf-1", home: "France", away: "Morocco", score: "2-0", et: false, penalties: false, winner: "France", note: "France dominated the match and won 2-0 against Morocco and France advances to semifinal" },
 ];
 
 export function getResult(home, away) {
