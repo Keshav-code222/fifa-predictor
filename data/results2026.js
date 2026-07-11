@@ -143,6 +143,7 @@ export const knockoutResults = [
 
   // QUARTERFINAL
   { id: "qf-1", home: "France", away: "Morocco", score: "2-0", et: false, penalties: false, winner: "France", note: "France dominated the match and won 2-0 against Morocco and France advances to semifinal" },
+  { id: "qf-2", home: "Spain", away: "Belgium", score: "2-1", et: false, penlaties: false, winner: "Spain", note: "Spain dominated the match and won the match comfortably" },
 ];
 
 export function getResult(home, away) {
