@@ -149,6 +149,9 @@ export const knockoutResults = [
 
   // SEMIFINAL
   { id: "sf-1", home: "France", away: "Spain", score: "0-2", et: false, penalties: false, winner: "Spain", note: "Spain beat France and eliminated the favourites from the world cup and booked their places in the final" },
+  { id: "sf-2", home: "England", away: "Argentina", score: "1-2", et: false, penalties: false, winner: "Argentina", note: "Argentina made a comeback and won the match in the final moments of the match and book their places in the final of the world cup" },
+
+  // FINAL
 ];
 
 export function getResult(home, away) {
