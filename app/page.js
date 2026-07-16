@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { fixtures } from "@/data/fixtures";
 import { teamFlags } from "@/data/teamFlags";
 import { getResult, getKnockoutResult } from "@/data/results2026";
@@ -8,6 +9,7 @@ import { knockoutFixtures } from "@/data/knockout";
 
 const TABS = [
   { id: "group", label: "Group Stage" },
+  { id: "tree", label: "Tournament Tree" },
   { id: "r32", label: "Round of 32" },
   { id: "r16", label: "Round of 16" },
   { id: "qf", label: "Quarter Finals" },
@@ -17,14 +19,14 @@ const TABS = [
 
 const MATCHDAYS = ["Matchday 1", "Matchday 2", "Matchday 3"];
 
-function FlagImage({ team }) {
+function FlagImage({ team, className }) {
   const code = teamFlags[team];
-  if (!code) return <div className="w-10 h-7 rounded bg-gray-800 mx-auto" />;
+  if (!code) return <div className={className || "w-10 h-7 rounded bg-gray-800 mx-auto"} />;
   return (
     <img
       src={`https://flagcdn.com/w80/${code}.png`}
       alt={team}
-      className="w-10 h-7 mx-auto object-cover rounded"
+      className={className || "w-10 h-7 mx-auto object-cover rounded"}
     />
   );
 }
@@ -631,6 +633,103 @@ function BigMatchRound({ fixtures, round, label }) {
   );
 }
 
+function TreeMatch({ fixture }) {
+  const [prediction, setPrediction] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const actualResult = getKnockoutResult(fixture.id);
+  const isPlayed = !!actualResult;
+
+  const isHomeWinner = prediction?.winner?.toLowerCase().includes(fixture.home.toLowerCase());
+  const isAwayWinner = prediction?.winner?.toLowerCase().includes(fixture.away.toLowerCase());
+  
+  const homeWins = isPlayed ? actualResult.winner === fixture.home : isHomeWinner;
+  const awayWins = isPlayed ? actualResult.winner === fixture.away : isAwayWinner;
+
+  async function predict() {
+    setLoading(true);
+    setPrediction(null);
+    const res = await fetch("/api/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...fixture, isKnockout: true }),
+    });
+    const data = await res.json();
+    setPrediction(data);
+    setLoading(false);
+  }
+
+  if (!fixture.confirmed || fixture.home === "TBD" || fixture.away === "TBD") {
+    return (
+      <div className="w-44 bg-gray-900 border border-gray-800 rounded-lg p-2 opacity-50 text-xs flex flex-col justify-center h-16 shrink-0">
+        <span className="text-gray-600 text-center">TBD vs TBD</span>
+      </div>
+    );
+  }
+
+  return (
+    <div 
+      onClick={!loading ? predict : undefined}
+      className={`w-44 bg-gray-900 border ${loading ? 'border-green-500' : 'border-gray-800'} rounded-lg p-1.5 cursor-pointer hover:border-gray-600 transition-all text-xs flex flex-col gap-1 relative overflow-hidden shrink-0 z-10 hover:z-20 hover:scale-105 shadow-md`}
+    >
+      {loading && <div className="absolute inset-0 bg-green-500/10 animate-pulse" />}
+      <div className={`flex items-center justify-between p-1 rounded transition-colors ${homeWins ? 'bg-gray-800 wave-advancing text-green-400 font-bold' : 'text-gray-300'}`}>
+        <div className="flex items-center gap-2">
+          <div className="w-5 shrink-0"><FlagImage team={fixture.home} className="w-5 h-3.5 object-cover rounded" /></div>
+          <span className="truncate w-24">{fixture.home}</span>
+        </div>
+        <span className="font-semibold">{isPlayed ? actualResult.score.split('-')[0] : prediction ? <AnimatedScore value={prediction.homeScore} /> : '-'}</span>
+      </div>
+      <div className={`flex items-center justify-between p-1 rounded transition-colors ${awayWins ? 'bg-gray-800 wave-advancing text-green-400 font-bold' : 'text-gray-300'}`}>
+        <div className="flex items-center gap-2">
+          <div className="w-5 shrink-0"><FlagImage team={fixture.away} className="w-5 h-3.5 object-cover rounded" /></div>
+          <span className="truncate w-24">{fixture.away}</span>
+        </div>
+        <span className="font-semibold">{isPlayed ? actualResult.score.split('-')[1] : prediction ? <AnimatedScore value={prediction.awayScore} /> : '-'}</span>
+      </div>
+    </div>
+  );
+}
+
+function TournamentTree() {
+  const leftR32 = knockoutFixtures.r32.slice(0, 8);
+  const rightR32 = knockoutFixtures.r32.slice(8, 16);
+  const leftR16 = knockoutFixtures.r16.slice(0, 4);
+  const rightR16 = knockoutFixtures.r16.slice(4, 8);
+  const leftQF = knockoutFixtures.qf.slice(0, 2);
+  const rightQF = knockoutFixtures.qf.slice(2, 4);
+  const leftSF = knockoutFixtures.sf.slice(0, 1);
+  const rightSF = knockoutFixtures.sf.slice(1, 2);
+  const final = knockoutFixtures.final;
+
+  const Column = ({ matches }) => (
+    <div className="flex flex-col justify-around gap-2 h-full py-2 shrink-0">
+      {matches.map(m => <TreeMatch key={m.id} fixture={m} />)}
+    </div>
+  );
+
+  return (
+    <div className="overflow-x-auto tree-scroll pb-8 mt-2">
+      <div className="min-w-[1200px] h-[750px] flex items-stretch justify-between px-2 relative bg-gray-950">
+        <Column matches={leftR32} />
+        <Column matches={leftR16} />
+        <Column matches={leftQF} />
+        <Column matches={leftSF} />
+        <div className="flex flex-col justify-center px-4 shrink-0 relative z-0">
+          <div className="text-center text-yellow-500 font-bold mb-4 tracking-widest uppercase text-sm">FINAL</div>
+          <div className="p-2 rounded-xl bg-gray-800/50 shadow-[0_0_50px_rgba(234,179,8,0.1)]">
+            <Column matches={final} />
+          </div>
+        </div>
+        <Column matches={rightSF} />
+        <Column matches={rightQF} />
+        <Column matches={rightR16} />
+        <Column matches={rightR32} />
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState("group");
 
@@ -661,28 +760,39 @@ export default function Home() {
       </div>
 
       <div className="max-w-5xl mx-auto px-4 py-8">
-        {activeTab === "group" && (
-          <div className="space-y-10">
-            {MATCHDAYS.map((matchday) => (
-              <div key={matchday}>
-                <h2 className="text-gray-400 text-xs uppercase tracking-widest mb-4 font-semibold">{matchday}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {fixtures
-                    .filter((f) => f.matchday === matchday)
-                    .map((f) => (
-                      <MatchCard key={f.id} fixture={f} />
-                    ))}
-                </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+            transition={{ duration: 0.3 }}
+          >
+            {activeTab === "group" && (
+              <div className="space-y-10">
+                {MATCHDAYS.map((matchday) => (
+                  <div key={matchday}>
+                    <h2 className="text-gray-400 text-xs uppercase tracking-widest mb-4 font-semibold">{matchday}</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {fixtures
+                        .filter((f) => f.matchday === matchday)
+                        .map((f) => (
+                          <MatchCard key={f.id} fixture={f} />
+                        ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        )}
+            )}
 
-        {activeTab === "r32" && <KnockoutRound fixtures={knockoutFixtures.r32} round="Round of 32" />}
-        {activeTab === "r16" && <KnockoutRound fixtures={knockoutFixtures.r16} round="Round of 16" />}
-        {activeTab === "qf" && <BigMatchRound fixtures={knockoutFixtures.qf} round="Quarter Finals" label="Quarter Final" />}
-        {activeTab === "sf" && <BigMatchRound fixtures={knockoutFixtures.sf} round="Semi Finals" label="Semi Final" />}
-        {activeTab === "final" && <BigMatchRound fixtures={knockoutFixtures.final} round="The Final" label="🏆 FIFA World Cup Final 2026" />}
+            {activeTab === "tree" && <TournamentTree />}
+            {activeTab === "r32" && <KnockoutRound fixtures={knockoutFixtures.r32} round="Round of 32" />}
+            {activeTab === "r16" && <KnockoutRound fixtures={knockoutFixtures.r16} round="Round of 16" />}
+            {activeTab === "qf" && <BigMatchRound fixtures={knockoutFixtures.qf} round="Quarter Finals" label="Quarter Final" />}
+            {activeTab === "sf" && <BigMatchRound fixtures={knockoutFixtures.sf} round="Semi Finals" label="Semi Final" />}
+            {activeTab === "final" && <BigMatchRound fixtures={knockoutFixtures.final} round="The Final" label="🏆 FIFA World Cup Final 2026" />}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </main>
   );
