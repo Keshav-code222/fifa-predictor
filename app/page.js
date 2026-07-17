@@ -9,7 +9,6 @@ import { knockoutFixtures } from "@/data/knockout";
 
 const TABS = [
   { id: "group", label: "Group Stage" },
-  { id: "tree", label: "Tournament Tree" },
   { id: "r32", label: "Round of 32" },
   { id: "r16", label: "Round of 16" },
   { id: "qf", label: "Quarter Finals" },
@@ -633,103 +632,6 @@ function BigMatchRound({ fixtures, round, label }) {
   );
 }
 
-function TreeMatch({ fixture }) {
-  const [prediction, setPrediction] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const actualResult = getKnockoutResult(fixture.id);
-  const isPlayed = !!actualResult;
-
-  const isHomeWinner = prediction?.winner?.toLowerCase().includes(fixture.home.toLowerCase());
-  const isAwayWinner = prediction?.winner?.toLowerCase().includes(fixture.away.toLowerCase());
-  
-  const homeWins = isPlayed ? actualResult.winner === fixture.home : isHomeWinner;
-  const awayWins = isPlayed ? actualResult.winner === fixture.away : isAwayWinner;
-
-  async function predict() {
-    setLoading(true);
-    setPrediction(null);
-    const res = await fetch("/api/predict", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...fixture, isKnockout: true }),
-    });
-    const data = await res.json();
-    setPrediction(data);
-    setLoading(false);
-  }
-
-  if (!fixture.confirmed || fixture.home === "TBD" || fixture.away === "TBD") {
-    return (
-      <div className="w-44 bg-gray-900 border border-gray-800 rounded-lg p-2 opacity-50 text-xs flex flex-col justify-center h-16 shrink-0">
-        <span className="text-gray-600 text-center">TBD vs TBD</span>
-      </div>
-    );
-  }
-
-  return (
-    <div 
-      onClick={!loading ? predict : undefined}
-      className={`w-44 bg-gray-900 border ${loading ? 'border-green-500' : 'border-gray-800'} rounded-lg p-1.5 cursor-pointer hover:border-gray-600 transition-all text-xs flex flex-col gap-1 relative overflow-hidden shrink-0 z-10 hover:z-20 hover:scale-105 shadow-md`}
-    >
-      {loading && <div className="absolute inset-0 bg-green-500/10 animate-pulse" />}
-      <div className={`flex items-center justify-between p-1 rounded transition-colors ${homeWins ? 'bg-gray-800 wave-advancing text-green-400 font-bold' : 'text-gray-300'}`}>
-        <div className="flex items-center gap-2">
-          <div className="w-5 shrink-0"><FlagImage team={fixture.home} className="w-5 h-3.5 object-cover rounded" /></div>
-          <span className="truncate w-24">{fixture.home}</span>
-        </div>
-        <span className="font-semibold">{isPlayed ? actualResult.score.split('-')[0] : prediction ? <AnimatedScore value={prediction.homeScore} /> : '-'}</span>
-      </div>
-      <div className={`flex items-center justify-between p-1 rounded transition-colors ${awayWins ? 'bg-gray-800 wave-advancing text-green-400 font-bold' : 'text-gray-300'}`}>
-        <div className="flex items-center gap-2">
-          <div className="w-5 shrink-0"><FlagImage team={fixture.away} className="w-5 h-3.5 object-cover rounded" /></div>
-          <span className="truncate w-24">{fixture.away}</span>
-        </div>
-        <span className="font-semibold">{isPlayed ? actualResult.score.split('-')[1] : prediction ? <AnimatedScore value={prediction.awayScore} /> : '-'}</span>
-      </div>
-    </div>
-  );
-}
-
-function TournamentTree() {
-  const leftR32 = knockoutFixtures.r32.slice(0, 8);
-  const rightR32 = knockoutFixtures.r32.slice(8, 16);
-  const leftR16 = knockoutFixtures.r16.slice(0, 4);
-  const rightR16 = knockoutFixtures.r16.slice(4, 8);
-  const leftQF = knockoutFixtures.qf.slice(0, 2);
-  const rightQF = knockoutFixtures.qf.slice(2, 4);
-  const leftSF = knockoutFixtures.sf.slice(0, 1);
-  const rightSF = knockoutFixtures.sf.slice(1, 2);
-  const final = knockoutFixtures.final;
-
-  const Column = ({ matches }) => (
-    <div className="flex flex-col justify-around gap-2 h-full py-2 shrink-0">
-      {matches.map(m => <TreeMatch key={m.id} fixture={m} />)}
-    </div>
-  );
-
-  return (
-    <div className="overflow-x-auto tree-scroll pb-8 mt-2">
-      <div className="min-w-[1200px] h-[750px] flex items-stretch justify-between px-2 relative bg-gray-950">
-        <Column matches={leftR32} />
-        <Column matches={leftR16} />
-        <Column matches={leftQF} />
-        <Column matches={leftSF} />
-        <div className="flex flex-col justify-center px-4 shrink-0 relative z-0">
-          <div className="text-center text-yellow-500 font-bold mb-4 tracking-widest uppercase text-sm">FINAL</div>
-          <div className="p-2 rounded-xl bg-gray-800/50 shadow-[0_0_50px_rgba(234,179,8,0.1)]">
-            <Column matches={final} />
-          </div>
-        </div>
-        <Column matches={rightSF} />
-        <Column matches={rightQF} />
-        <Column matches={rightR16} />
-        <Column matches={rightR32} />
-      </div>
-    </div>
-  );
-}
-
 export default function Home() {
   const [activeTab, setActiveTab] = useState("group");
 
@@ -785,7 +687,6 @@ export default function Home() {
               </div>
             )}
 
-            {activeTab === "tree" && <TournamentTree />}
             {activeTab === "r32" && <KnockoutRound fixtures={knockoutFixtures.r32} round="Round of 32" />}
             {activeTab === "r16" && <KnockoutRound fixtures={knockoutFixtures.r16} round="Round of 16" />}
             {activeTab === "qf" && <BigMatchRound fixtures={knockoutFixtures.qf} round="Quarter Finals" label="Quarter Final" />}
