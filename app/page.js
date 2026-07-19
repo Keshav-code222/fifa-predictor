@@ -13,6 +13,7 @@ const TABS = [
   { id: "r16", label: "Round of 16" },
   { id: "qf", label: "Quarter Finals" },
   { id: "sf", label: "Semi Finals" },
+  { id: "tp", label: "3rd Place Match"},
   { id: "final", label: "Final" },
 ];
 
@@ -691,6 +692,7 @@ export default function Home() {
             {activeTab === "r16" && <KnockoutRound fixtures={knockoutFixtures.r16} round="Round of 16" />}
             {activeTab === "qf" && <BigMatchRound fixtures={knockoutFixtures.qf} round="Quarter Finals" label="Quarter Final" />}
             {activeTab === "sf" && <BigMatchRound fixtures={knockoutFixtures.sf} round="Semi Finals" label="Semi Final" />}
+            {activeTab === "tp" && <BigMatchRound fixtures={knockoutFixtures.tp} round="3rd Place Match" label="3rd Place Match" />}
             {activeTab === "final" && <BigMatchRound fixtures={knockoutFixtures.final} round="The Final" label="🏆 FIFA World Cup Final 2026" />}
           </motion.div>
         </AnimatePresence>

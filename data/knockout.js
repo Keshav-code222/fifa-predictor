@@ -37,6 +37,9 @@ export const knockoutFixtures = {
     { id: "sf-1", home: "France", away: "Spain", date: "2026-07-15", time: "12:30 AM IST", venue: "Dallas Stadium, Arlington", confirmed: true },
     { id: "sf-2", home: "England", away: "Argentina", date: "2026-07-16", time: "12:30 AM IST", venue: "Atlanta Stadium, Atlanta", confirmed: true },
   ],
+  tp: [
+    { id: "tp", home: "France", away: "England", date: "2026-07-19", time: "2:30 AM IST", venue: "Miami Stadium, Miami Gardens", confirmed: true },
+  ],
   final: [
     { id: "final-1", home: "Spain", away: "Argentina", date: "2026-07-20", time: "12:30 AM IST", venue: "New York New Jersey Stadium, East Rutherford", confirmed: true },
   ],

@@ -151,6 +151,9 @@ export const knockoutResults = [
   { id: "sf-1", home: "France", away: "Spain", score: "0-2", et: false, penalties: false, winner: "Spain", note: "Spain beat France and eliminated the favourites from the world cup and booked their places in the final" },
   { id: "sf-2", home: "England", away: "Argentina", score: "1-2", et: false, penalties: false, winner: "Argentina", note: "Argentina made a comeback and won the match in the final moments of the match and book their places in the final of the world cup" },
 
+  //THIRD PLACE MATCH
+  { id: "tp", home: "France", away: "England", score: "4-6", et: false, penalties: false, winner: "England", note: "It was a high scoring game in which we saw a total of 10 goals been scored and England beat the French 6-4 and won bronze medal" },
+
   // FINAL
 ];
 
