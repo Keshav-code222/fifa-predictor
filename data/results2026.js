@@ -155,6 +155,7 @@ export const knockoutResults = [
   { id: "tp", home: "France", away: "England", score: "4-6", et: false, penalties: false, winner: "England", note: "It was a high scoring game in which we saw a total of 10 goals been scored and England beat the French 6-4 and won bronze medal" },
 
   // FINAL
+  { id: "final-1", home: "Spain", away: "Argentina", score: "0-0", et: true, etScore: "1-0", penalties: false, winner: "Spain", note: "Spain beat Argentina in the final to win their 2nd World Cup" },
 ];
 
 export function getResult(home, away) {
